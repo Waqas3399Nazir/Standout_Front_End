@@ -12,7 +12,7 @@ const ContactDetails = () => {
       <div className="flex-5 flex flex-col">
         <div className="bg-[#D9D9D9] w-[221px] h-[101px]"></div>
         <div className="mt-[2rem]">
-          <p className="text-xl text-white font-subHeading">
+          <p className="text-xl text-white font-Inter">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industrys
           </p>
@@ -22,7 +22,7 @@ const ContactDetails = () => {
         <h1 className="text-white font-heading text-formHeading mb-[1.75rem]">
           Contact Details:
         </h1>
-        <div className="flex flex-row gap-[1rem] font-subHeading text-white text-lg font-normal mb-[1rem]">
+        <div className="flex flex-row gap-[1rem] font-Inter text-white text-lg font-normal mb-[1rem]">
           <div>
             <LocationOnIcon />
           </div>
@@ -32,7 +32,7 @@ const ContactDetails = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-[1rem] font-subHeading text-white text-lg font-normal mb-[1rem]">
+        <div className="flex flex-row gap-[1rem] font-Inter text-white text-lg font-normal mb-[1rem]">
           <div>
             <EmailIcon />
           </div>
@@ -40,7 +40,7 @@ const ContactDetails = () => {
             <p>aaron@standoutspecialties.com</p>
           </div>
         </div>
-        <div className="flex flex-row gap-[1rem] font-subHeading text-white text-lg font-normal mb-[1rem]">
+        <div className="flex flex-row gap-[1rem] font-Inter text-white text-lg font-normal mb-[1rem]">
           <div>
             <PhoneEnabledIcon />
           </div>
@@ -48,7 +48,7 @@ const ContactDetails = () => {
             <p>(610) 426-3025</p>
           </div>
         </div>
-        <div className="flex flex-row gap-[1rem] font-subHeading text-white text-lg font-normal mb-[1rem]">
+        <div className="flex flex-row gap-[1rem] font-Inter text-white text-lg font-normal mb-[1rem]">
           <div>
             <EmailIcon />
           </div>

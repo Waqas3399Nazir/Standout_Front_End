@@ -20,7 +20,7 @@ const Product = () => {
     <>
       <Header />
       <section className="h-fit">
-        <div className="h-fit">
+        <div className="h-fit bg-black">
           <Image
             className="mt-[-10rem]"
             src="/images/product-page-image.png"
@@ -33,10 +33,10 @@ const Product = () => {
       <section className="p-productPagePadding bg-black">
         <div className="flex flex-row justify-between">
           <div className="w-[23.70%]">
-            <h1 className="text-white font-bold text-secondContainerHeading font-subHeading">
+            <h1 className="text-white font-bold text-secondContainerHeading font-Inter">
               Filter
             </h1>
-            <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-subHeading mt-[0.625rem] mb-[3rem]">
+            <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
               Search your item
             </p>
             <div className="bg-white rounded">
@@ -60,7 +60,7 @@ const Product = () => {
               <Dropdown />
             </div>
             <div className="mt-[2rem] mb-[1.5rem]">
-              <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-subHeading mt-[0.625rem]">
+              <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem]">
                 Price range
               </p>
               <PriceRangeSlider />
@@ -76,12 +76,12 @@ const Product = () => {
           <div className="w-[65%]">
             <div className="flex flex-row justify-between">
               <div>
-                <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-subHeading mt-[0.625rem] mb-[3rem]">
+                <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Showing <strong>8 Products from 40</strong>
                 </p>
               </div>
               <div className="flex flex-row gap-x-4">
-                <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-subHeading mt-[0.625rem] mb-[3rem]">
+                <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Sort by
                 </p>
                 <Dropdown />

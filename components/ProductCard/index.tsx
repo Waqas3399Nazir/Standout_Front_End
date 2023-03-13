@@ -17,10 +17,10 @@ const ProductCard = () => {
         <p className="text-white">$34,500</p>
       </div>
       <div className="bg-white py-[2.5rem] px-[7%]">
-        <h1 className="font-bold text-[#F23939] text-formHeading font-subHeading">
+        <h1 className="font-bold text-[#F23939] text-formHeading font-Inter">
           AFW 09 LIBERTY SS
         </h1>
-        <h3 className="text-[#464646] text-homeSubHeading font-subHeading">
+        <h3 className="text-[#464646] text-homeSubHeading font-Inter">
           American Force
         </h3>
         <div className="flex flex-row  mt-[1.5rem] font-Montserrat">

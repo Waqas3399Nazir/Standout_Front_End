@@ -34,7 +34,7 @@ export default function Home() {
               width={100}
               height={100}
             />
-            <p className="mt-[1.19rem] text-white text-homeSubHeading font-normal font-subHeading">
+            <p className="mt-[1.19rem] text-white text-homeSubHeading font-normal font-Inter">
               $100 Off Wheel & Tire Packages when Picked up locally
             </p>
             <div className="mt-[6rem] text-white">

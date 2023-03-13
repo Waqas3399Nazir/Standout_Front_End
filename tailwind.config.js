@@ -38,16 +38,26 @@ module.exports = {
         registerImage: "url('/images/signup-image.png')",
         productPageImage: "url('/images/product-page-image.png')",
         tyreImage: "url('/images/footer-above-tyre.png')",
+        dealCardBackgroundImage: "url('/images/card-placeholder-image.png')",
       },
       padding: {
         sectionPadding: "0 21.20% 0 21.20%",
         productPagePadding: "5.56rem 7.8125%",
+        sectionXPadding: "0 7.8125% 0 7.8125%",
+        checkoutSectionPadding: " 0 16.67% 0 16.67%",
+      },
+      maxWidth: {
+        dealsCardWidth: "20rem",
+      },
+      minWidth: {
+        dealsCardWidth: "20rem",
       },
     },
     fontFamily: {
       heading: ["Bebas Neue"],
-      subHeading: ["Inter"],
+      Inter: ["Inter"],
       Montserrat: ["Montserrat"],
+      Poppins: ["Poppins"],
     },
     letterSpacing: {
       headingSpace: "-0.01em",
