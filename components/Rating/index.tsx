@@ -18,7 +18,7 @@ const labels: { [index: string]: string } = {
 };
 
 export default function TextRating() {
-  const value = 3.5;
+  const value = 4;
 
   return (
     <Box
@@ -30,7 +30,7 @@ export default function TextRating() {
       }}
     >
       <Rating
-        className="bg-[#ffffff80] text-[#F23939]"
+        className="bg-black text-[#F23939]"
         name="text-feedback"
         value={value}
         readOnly

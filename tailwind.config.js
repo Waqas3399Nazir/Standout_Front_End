@@ -8,6 +8,7 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  // important: true,
   theme: {
     extend: {
       spacing: {
@@ -51,6 +52,9 @@ module.exports = {
       },
       minWidth: {
         dealsCardWidth: "20rem",
+      },
+      minHeight: {
+        autoHeight: "27rem",
       },
     },
     fontFamily: {

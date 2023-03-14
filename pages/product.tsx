@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import InputBase from "@mui/material/InputBase";
@@ -14,8 +14,55 @@ import ProductCard from "@/components/ProductCard";
 import FooterAbove from "@/components/FooterAbove";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
+import Pagination from "@mui/material/Pagination";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 
 const Product = () => {
+  const [brand, setBrand] = useState("");
+  const [sortByValue, setSortByValue] = useState("");
+
+  const [pageValue, setPageValue] = useState({
+    start: 1,
+    middle: 2,
+    end: 3,
+  });
+
+  const incremntPageHandler = () => {
+    setPageValue({
+      ...pageValue,
+      start: pageValue.start + 1,
+      middle: pageValue.middle + 1,
+      end: pageValue.end + 1,
+    });
+  };
+
+  const decrementPageHandler = () => {
+    setPageValue({
+      ...pageValue,
+      start: pageValue.start - 1,
+      middle: pageValue.middle - 1,
+      end: pageValue.end - 1,
+    });
+  };
+
+  useEffect(() => {
+    if (brand) {
+      console.log(brand);
+      console.log(sortByValue);
+    }
+  }, [brand]);
+
+  const chooseBrand = [
+    "Choose Brand",
+    "Brand 1",
+    "Brand 2",
+    "Brand 3",
+    "Brand 4",
+    "Brand 5",
+  ];
+
+  const sortBy = ["Select", "Newest", "Oldest", "Out Dated"];
   return (
     <>
       <Header />
@@ -57,7 +104,7 @@ const Product = () => {
               </IconButton>
             </div>
             <div className="mt-[1.25rem] h-[2.75rem]">
-              <Dropdown />
+              <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
             </div>
             <div className="mt-[2rem] mb-[1.5rem]">
               <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem]">
@@ -84,7 +131,7 @@ const Product = () => {
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Sort by
                 </p>
-                <Dropdown />
+                <Dropdown dropdownValues={sortBy} selValue={setSortByValue} />
               </div>
             </div>
             <div>
@@ -108,8 +155,36 @@ const Product = () => {
                   <ProductCard />
                 </Grid>
               </Grid>
-              <div className="text-white my-[5rem] text-center">
-                <h1>Pagination left</h1>
+              <div className="text-white flex flex-row gap-[1rem] my-[5rem] justify-center">
+                {/* <h1>Pagination left</h1> */}
+                {/* <Pagination
+                  className="text-[#F23939] bg-white w-fit m-auto"
+                  count={3}
+                  variant="outlined"
+                  shape="rounded"
+                /> */}
+                <button
+                  onClick={decrementPageHandler}
+                  disabled={pageValue.start <= 1 ? true : false}
+                  className="px-[1rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md hover:bg-[#F23939] hover:border-[#F23939]"
+                >
+                  <KeyboardDoubleArrowLeftIcon />
+                </button>
+                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                  {pageValue.start}
+                </button>
+                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                  {pageValue.middle}
+                </button>
+                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                  {pageValue.end}
+                </button>
+                <button
+                  onClick={incremntPageHandler}
+                  className="px-[1rem] py-[0.5rem] border-[1px] rounded-md hover:bg-[#F23939] hover:border-[#F23939]"
+                >
+                  <KeyboardDoubleArrowRightIcon />
+                </button>
               </div>
             </div>
           </div>

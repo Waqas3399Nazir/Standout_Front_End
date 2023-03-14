@@ -13,6 +13,9 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 //
 import Box from "@mui/material/Box";
@@ -98,6 +101,20 @@ const Register = () => {
   const loader = useSelector(activityInProgress);
   const userMessage = useSelector(message);
   const [passwordMismatch, setPasswordMismatch] = useState("");
+  const [userDefinedError, setUserDefinedError] = useState("");
+
+  //regular expressions //regex
+  const regexName = /^[a-zA-Z]{3,30}$/;
+  const regexLastName = /^[a-zA-Z\s]{3,30}$/;
+  const regexCompanyName = /^[a-zA-Z\s]{5,30}$/;
+  //for only US Phone Numbers in any format
+  const regexPhoneNumber = /^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
+  const regexApartmentAddress = /^[a-zA-Z0-9\s,'-]*$/;
+  const regexCity = /^[a-zA-Z\s]{5,30}$/;
+  const regexState = /^[a-zA-Z\s]{5,30}$/;
+  const regexZipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regexPassword = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;\"'<>,.?\/\\|\-]{8,}$/;
 
   const registerUserHandler = (event: any) => {
     event.preventDefault();
@@ -107,14 +124,56 @@ const Register = () => {
     //to clean stored message
     dispatch(messageCleanUp());
 
-    if (userData) {
-      if (userData.password === userData.confirmPassword) {
-        setPasswordMismatch("");
-        dispatch(registerUser(userData));
-      } else {
-        setPasswordMismatch("Please Enter Same Password!");
-      }
+    if (
+      userData.email === "" ||
+      userData.password === "" ||
+      userData.confirmPassword === "" ||
+      userData.firstName === "" ||
+      userData.lastName === "" ||
+      userData.companyOrOrganization === "" ||
+      userData.phoneNumber === "" ||
+      userData.aptOrSuite === "" ||
+      userData.cityOrTown === "" ||
+      userData.zipCode === "" ||
+      userData.state === ""
+    ) {
+      setUserDefinedError("Please Enter Valid Data!");
+    } else if (!regexName.test(userData.firstName)) {
+      setUserDefinedError("Please Enter Valid First Name!");
+    } else if (!regexLastName.test(userData.lastName)) {
+      setUserDefinedError("Please Enter Valid Last Name!");
+    } else if (!regexCompanyName.test(userData.companyOrOrganization)) {
+      setUserDefinedError("Please Enter Valid Company Name!");
+    } else if (!regexPhoneNumber.test(userData.phoneNumber)) {
+      setUserDefinedError("Please Enter Valid Phone Number!");
+    } else if (!regexApartmentAddress.test(userData.aptOrSuite)) {
+      setUserDefinedError("Please Enter Valid Apartment Address!");
+    } else if (!regexCity.test(userData.cityOrTown)) {
+      setUserDefinedError("Please Enter Valid City Name!");
+    } else if (!regexState.test(userData.state)) {
+      setUserDefinedError("Please Enter Valid State Name!");
+    } else if (!regexZipCode.test(userData.zipCode)) {
+      setUserDefinedError("Please Enter Valid Zip Code");
+    } else if (!regexEmail.test(userData.email)) {
+      setUserDefinedError("Please Enter Valid Email!");
+    } else if (!regexPassword.test(userData.password)) {
+      setUserDefinedError("Please Enter Valid Password!");
+    } else if (!regexPassword.test(userData.confirmPassword)) {
+      setUserDefinedError("Please Enter Valid Password!");
+    } else if (userData.password === userData.confirmPassword) {
+      setUserDefinedError("");
+      dispatch(registerUser(userData));
+    } else {
+      setUserDefinedError("Please Enter Same Password!");
     }
+    // if (userData) {
+    //   if (userData.password === userData.confirmPassword) {
+    //     setUserDefinedError("");
+    //     dispatch(registerUser(userData));
+    //   } else {
+    //     setUserDefinedError("Please Enter Same Password!");
+    //   }
+    // }
   };
 
   useEffect(() => {
@@ -124,7 +183,7 @@ const Register = () => {
       //to clean stored message
       dispatch(messageCleanUp());
 
-      router.push("/");
+      router.push("/login");
     }
   }, [loader]);
 
@@ -292,6 +351,26 @@ const Register = () => {
                   </Select>
                 </FormControl>
               </div> */}
+            </div>
+            <div>
+              {errorMessage.message || userDefinedError ? (
+                <Stack
+                  className="mb-4 border-red-500"
+                  sx={{ width: "100%" }}
+                  spacing={2}
+                  color="#FF445A"
+                >
+                  <Alert variant="outlined" severity="warning" color="error">
+                    <p className="text-[#FF445A]">
+                      {errorMessage.message
+                        ? errorMessage.message
+                        : userDefinedError}
+                    </p>
+                  </Alert>
+                </Stack>
+              ) : (
+                ""
+              )}
             </div>
             <button
               type="submit"

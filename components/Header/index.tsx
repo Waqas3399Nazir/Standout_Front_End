@@ -6,6 +6,8 @@ import Dropdown from "../Dropdown";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import { SS_TOKEN } from "@/utils/constants";
+import Badge from "@mui/material/Badge";
+import Avatar from "@mui/material/Avatar";
 
 const Header = () => {
   const router = useRouter();
@@ -35,30 +37,51 @@ const Header = () => {
     <header className="h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
       <nav className="w-[52%]  float-right text-white">
         <ul className="mx-[13.66%] mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
-          <li className="">Store</li>
-          <li className="">Brand</li>
           <li className="">
-            <Link href="/request-code">Request Code</Link>
+            <Link className="cursor-pointer" href="/">
+              Store
+            </Link>
           </li>
           <li className="">
-            <Link href="/contact">Cotact Us</Link>
+            <Link className="cursor-pointer" href="/">
+              Brand
+            </Link>
           </li>
           <li className="">
-            <SearchIcon />
+            <Link className="cursor-pointer" href="/request-code">
+              Request Code
+            </Link>
           </li>
+          <li className="">
+            <Link className="cursor-pointer" href="/contact">
+              Cotact Us
+            </Link>
+          </li>
+          {/* <li className="">
+            <SearchIcon className="cursor-pointer" />
+          </li> */}
           <li className="inline align-middle">
-            <ShoppingCartIcon />
+            <Link href="/cart">
+              <Badge badgeContent={4} color="error" className="cursor-pointer">
+                <ShoppingCartIcon />
+              </Badge>
+            </Link>
           </li>
           <li className="inline align-middle" onClick={showHideHandler}>
             {!showHideBtns ? (
-              <Image
-                className="inline"
+              <Avatar
+                className="cursor-pointer w-[2rem] h-[2rem]"
+                alt="Travis Howard"
                 src="/images/header-icon.svg"
-                alt=""
-                width={20}
-                height={20}
               />
             ) : (
+              // <Image
+              //   className="inline"
+              //   src="/images/header-icon.svg"
+              //   alt=""
+              //   width={20}
+              //   height={20}
+              // />
               ""
             )}
             {showHideDropdown ? (
@@ -70,7 +93,7 @@ const Header = () => {
           <li className="inline align-middle">
             {showHideBtns ? (
               <button
-                className="px-[1rem] py-[0.5rem] bg-[#F23939] rounded-md"
+                className="px-[1rem] py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
                 onClick={naviagteToSignUpPage}
               >
                 Sign Up
@@ -82,7 +105,7 @@ const Header = () => {
           <li className="inline">
             {showHideBtns ? (
               <button
-                className="px-[1rem] py-[0.5rem] bg-[#F23939] rounded-md"
+                className="px-[1rem] py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
                 onClick={naviagteToLoginPage}
               >
                 Login

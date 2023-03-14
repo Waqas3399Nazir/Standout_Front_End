@@ -14,17 +14,17 @@ const Dropdown = ({ showHide }: Props) => {
 
   return (
     <OutsideClickHandler onOutsideClick={() => showHide(false)}>
-      <div className="bg-white text-black rounded absolute mt-[0.5rem] py-[0.75rem] ml-[-5.7rem]">
+      <div className="bg-[#F23939] text-white rounded absolute mt-[0.5rem] py-[0.75rem] ml-[-5.7rem]">
         <ul className="text-left">
-          <li className="px-[0.75rem] cursor-pointer py-[3px] text-sm font-bold mb-[3px] hover:bg-[#F23939] hover:text-white">
+          <li className="px-[0.75rem] cursor-pointer py-[3px] text-sm font-bold mb-[3px] hover:bg-black hover:text-white">
             Username
           </li>
           <hr className="bg-black h-[0.15rem]" />
-          <li className="px-[0.75rem] cursor-pointer py-[3px] mt-[3px] hover:bg-[#F23939] hover:text-white">
+          <li className="px-[0.75rem] cursor-pointer py-[3px] mt-[3px] hover:bg-black hover:text-white">
             Profile Setting
           </li>
           <li
-            className="px-[0.75rem] cursor-pointer py-[3px] hover:bg-[#F23939] hover:text-white"
+            className="px-[0.75rem] cursor-pointer py-[3px] hover:bg-black hover:text-white"
             onClick={logoutHandler}
           >
             <Link href="/login">Logout</Link>

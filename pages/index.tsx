@@ -12,6 +12,7 @@ import CustomizedProgressBars from "@/components/LinearProgress";
 import Search from "@/components/Search";
 
 export default function Home() {
+  console.log(process.env.NODE_ENV);
   return (
     <>
       <Head>

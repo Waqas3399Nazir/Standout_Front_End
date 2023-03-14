@@ -69,6 +69,8 @@ const Login = () => {
 
   console.log(errorMessage);
 
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const loginUserHandler = (event: any) => {
     event.preventDefault();
 
@@ -76,7 +78,14 @@ const Login = () => {
 
     if (userLoginData.email === "" || userLoginData.password === "") {
       setUserDefinedError("Enter valid Email and Password");
+    } else if (!regexEmail.test(userLoginData.email)) {
+      setUserDefinedError("Please Enter a valid Email!");
     }
+    // if (/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/.test(userLoginData.email)) {
+    //   setUserDefinedError("Please Enter a valid Email!");
+    // } else if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(userLoginData.password)) {
+
+    // }
     //to clean stored error message
     dispatch(errorCleanUp());
     //to clean stored message

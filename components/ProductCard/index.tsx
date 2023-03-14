@@ -4,7 +4,7 @@ import Image from "next/image";
 const ProductCard = () => {
   return (
     <div className="rounded-[3rem]">
-      <div className="bg-[#C4C4C4]">
+      <div className="bg-[#C4C4C4] rounded-t-[0.5rem]">
         <Image
           className="w-[75%] h-[75%] m-auto"
           src="/images/card-placeholder-image.png"
@@ -16,7 +16,7 @@ const ProductCard = () => {
       <div className="bg-[#F23939] py-[10px] px-[1.75rem] rounded-[2rem] w-fit ml-[17%] mt-[-1.55rem] absolute">
         <p className="text-white">$34,500</p>
       </div>
-      <div className="bg-white py-[2.5rem] px-[7%]">
+      <div className="bg-white py-[2.5rem] px-[7%] rounded-b-[0.5rem]">
         <h1 className="font-bold text-[#F23939] text-formHeading font-Inter">
           AFW 09 LIBERTY SS
         </h1>

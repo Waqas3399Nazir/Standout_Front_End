@@ -191,16 +191,11 @@ const ProductDetails = () => {
               <Stack spacing={1} className="text-white">
                 <Rating
                   className="text-white"
-                  name="half-rating"
-                  defaultValue={2.5}
-                  precision={0.5}
-                />
-                {/* <Rating
                   name="half-rating-read"
                   defaultValue={2.5}
                   precision={0.5}
                   readOnly
-                /> */}
+                />
               </Stack>
             </div>
           </div>
@@ -227,16 +222,11 @@ const ProductDetails = () => {
             <Stack spacing={1} className="text-white">
               <Rating
                 className="text-[#F23939]"
-                name="full-rating"
-                defaultValue={4.5}
-                precision={5}
+                name="half-rating-read"
+                defaultValue={5}
+                precision={0.5}
+                readOnly
               />
-              {/* <Rating
-                  name="half-rating-read"
-                  defaultValue={2.5}
-                  precision={0.5}
-                  readOnly
-                /> */}
             </Stack>
             <p className="text-[#ffffff80] text-homeButtonText font-Poppins font-normal">
               12 March 2023
@@ -271,7 +261,7 @@ const ProductDetails = () => {
         <div className="flex flex-row gap-[2rem] mt-[3rem]">
           <DealsCard />
           <DealsCard />
-          <DealsCard />
+          {/* <DealsCard /> */}
           {/* <DealsCard />
           <DealsCard /> */}
         </div>
