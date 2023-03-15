@@ -76,24 +76,23 @@ const Login = () => {
 
     console.log(errorMessage);
 
+    //to clean stored error message
+    dispatch(errorCleanUp());
+    //to clean stored message
+    dispatch(messageCleanUp());
+
     if (userLoginData.email === "" || userLoginData.password === "") {
       setUserDefinedError("Enter valid Email and Password");
     } else if (!regexEmail.test(userLoginData.email)) {
       setUserDefinedError("Please Enter a valid Email!");
+    } else {
+      dispatch(loginUser(userLoginData));
     }
     // if (/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/.test(userLoginData.email)) {
     //   setUserDefinedError("Please Enter a valid Email!");
     // } else if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(userLoginData.password)) {
 
     // }
-    //to clean stored error message
-    dispatch(errorCleanUp());
-    //to clean stored message
-    dispatch(messageCleanUp());
-
-    if (userLoginData) {
-      dispatch(loginUser(userLoginData));
-    }
 
     console.log(userMessage);
   };
@@ -227,7 +226,15 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block h-screen flex-5 bg-loginImage bg-no-repeat"></div>
+      <div className="hidden md:block h-screen flex-5">
+        <Image
+          className="w-full h-full"
+          src="/images/login.png"
+          alt=""
+          width={100}
+          height={100}
+        />
+      </div>
     </div>
     // </AuthGuard>
   );

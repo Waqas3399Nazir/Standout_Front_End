@@ -17,6 +17,22 @@ import Image from "next/image";
 import Pagination from "@mui/material/Pagination";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+//testing start
+import {
+  errorCleanUp,
+  getAllProducts,
+} from "@/redux-dev/products/product.slice";
+import {
+  pageCount,
+  productsCount,
+  products,
+  error,
+  activityInProgress,
+} from "@/redux-dev/products/product.selector";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux-dev/store";
+import { CircularProgress } from "@material-ui/core";
+//testing end
 
 const Product = () => {
   const [brand, setBrand] = useState("");
@@ -35,6 +51,8 @@ const Product = () => {
       middle: pageValue.middle + 1,
       end: pageValue.end + 1,
     });
+    // const value = pageValue.start;
+    dispatch(getAllProducts(pageValue.start));
   };
 
   const decrementPageHandler = () => {
@@ -44,14 +62,15 @@ const Product = () => {
       middle: pageValue.middle - 1,
       end: pageValue.end - 1,
     });
+    dispatch(getAllProducts(pageValue.start));
   };
 
-  useEffect(() => {
-    if (brand) {
-      console.log(brand);
-      console.log(sortByValue);
-    }
-  }, [brand]);
+  const onPageClickHandler = (pageNumber: number) => {
+    console.log(pageNumber);
+    dispatch(getAllProducts(pageNumber));
+  };
+
+  // const currentPage =
 
   const chooseBrand = [
     "Choose Brand",
@@ -61,6 +80,20 @@ const Product = () => {
     "Brand 4",
     "Brand 5",
   ];
+
+  //testing start
+  const dispatch = useDispatch<AppDispatch>();
+  const numberOfPages = useSelector(pageCount);
+  const numberOfProducts = useSelector(productsCount);
+  const getProducts = useSelector(products);
+  const errorMessage = useSelector(error);
+  const loader = useSelector(activityInProgress);
+
+  useEffect(() => {
+    dispatch(getAllProducts(""));
+  }, []);
+
+  //testing end
 
   const sortBy = ["Select", "Newest", "Oldest", "Out Dated"];
   return (
@@ -124,7 +157,7 @@ const Product = () => {
             <div className="flex flex-row justify-between">
               <div>
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
-                  Showing <strong>8 Products from 40</strong>
+                  Showing <strong>20 Products from {numberOfProducts}</strong>
                 </p>
               </div>
               <div className="flex flex-row gap-x-4">
@@ -135,7 +168,20 @@ const Product = () => {
               </div>
             </div>
             <div>
-              <Grid container spacing={4}>
+              {loader ? (
+                <CircularProgress style={{ color: "white" }} size="1.5rem" />
+              ) : (
+                <Grid container spacing={4}>
+                  {getProducts.map((product: any) => {
+                    return (
+                      <Grid key={product.id} item xs={6} md={6}>
+                        <ProductCard product={product} />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              )}
+              {/* <Grid container spacing={4}>
                 <Grid item xs={6} md={6}>
                   <ProductCard />
                 </Grid>
@@ -154,7 +200,7 @@ const Product = () => {
                 <Grid item xs={6} md={6}>
                   <ProductCard />
                 </Grid>
-              </Grid>
+              </Grid> */}
               <div className="text-white flex flex-row gap-[1rem] my-[5rem] justify-center">
                 {/* <h1>Pagination left</h1> */}
                 {/* <Pagination
@@ -170,17 +216,27 @@ const Product = () => {
                 >
                   <KeyboardDoubleArrowLeftIcon />
                 </button>
-                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                <button
+                  onClick={() => onPageClickHandler(pageValue.start)}
+                  className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]"
+                >
                   {pageValue.start}
                 </button>
-                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                <button
+                  onClick={() => onPageClickHandler(pageValue.middle)}
+                  className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]"
+                >
                   {pageValue.middle}
                 </button>
-                <button className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]">
+                <button
+                  onClick={() => onPageClickHandler(pageValue.end)}
+                  className="px-[1.5rem] min-w-[3rem] py-[0.5rem] border-[1px] rounded-md bg-white text-[#F23939] hover:bg-[#F23939] hover:text-white hover:border-[#F23939]"
+                >
                   {pageValue.end}
                 </button>
                 <button
                   onClick={incremntPageHandler}
+                  disabled={pageValue.end >= numberOfPages ? true : false}
                   className="px-[1rem] py-[0.5rem] border-[1px] rounded-md hover:bg-[#F23939] hover:border-[#F23939]"
                 >
                   <KeyboardDoubleArrowRightIcon />

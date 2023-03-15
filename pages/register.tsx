@@ -188,8 +188,8 @@ const Register = () => {
   }, [loader]);
 
   return (
-    <div className="flex flex-row">
-      <div className="flex-5 flex mb-[3rem]">
+    <div className="flex flex-row h-fit">
+      <div className="flex-5 flex pb-[3rem]">
         <div className="w-2/3 md:w-1/2 m-auto">
           <form method="post">
             <h1 className="text-heading not-italic text-black font-bold">
@@ -407,14 +407,14 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="flex-5 hidden md:block bg-registerImage">
-        {/* <Image
-          className="w-full h-screen"
+      <div className="hidden md:block flex-5">
+        <Image
+          className="w-full h-screen min-h-full"
           src="/images/signup-image.png"
           alt=""
           width={100}
           height={100}
-        /> */}
+        />
       </div>
     </div>
   );

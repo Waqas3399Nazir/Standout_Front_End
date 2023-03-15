@@ -18,7 +18,7 @@ export const registerUser = createAsyncThunk(
   "register/user",
   async (userDetails: any, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/signUp", userDetails);
+      const { data } = await axiosInstance().post("/auth/signUp", userDetails);
       console.log(data.message);
       return data.message;
     } catch (error: any) {
@@ -33,7 +33,10 @@ export const loginUser = createAsyncThunk(
   "login/user",
   async (userCredentials: any, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/signIn", userCredentials);
+      const { data } = await axiosInstance().post(
+        "/auth/signIn",
+        userCredentials
+      );
       localStorage.setItem(SS_TOKEN, data.token);
       return data;
     } catch (error: any) {

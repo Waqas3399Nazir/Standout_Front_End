@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FooterAbove from "@/components/FooterAbove";
@@ -14,9 +14,44 @@ import Stack from "@mui/material/Stack";
 import Dropdown from "@/components/SelectDropdown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import DealsCard from "@/components/DealsCard";
+import { useRouter } from "next/router";
+//testing start
+import {
+  errorCleanUp,
+  getSingleProduct,
+} from "@/redux-dev/products/product.slice";
+import {
+  product,
+  activityInProgress,
+  error,
+} from "@/redux-dev/products/product.selector";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux-dev/store";
+import { CircularProgress } from "@material-ui/core";
+//testing end
 
 const ProductDetails = () => {
-  //product-details-image.png;
+  const router = useRouter();
+  // console.log(router, "router");
+  console.log(router.query.productId);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const productDetails = useSelector(product);
+  const loader = useSelector(activityInProgress);
+  const errorMessage = useSelector(error);
+
+  console.log(productDetails);
+
+  useEffect(() => {
+    //to clean any stored errors
+    dispatch(errorCleanUp());
+
+    //get Single Product Detail
+    console.log(router.query);
+    if (router.query.productId) {
+      dispatch(getSingleProduct(router.query.productId));
+    }
+  }, [router.query.productId]);
   return (
     <>
       <Header />
@@ -27,46 +62,50 @@ const ProductDetails = () => {
         <div className="flex flex-row gap-[10%]">
           <div className="w-[54%]">
             <div className="bg-[#C4C4C4] rounded-2xl w-full">
-              <Image
-                className="w-full h-full"
-                src="/images/product-details-image.png"
-                alt=""
-                width={550}
-                height={350}
-              />
+              {!loader && productDetails ? (
+                <Image
+                  className="m-auto"
+                  src={productDetails?.photoUrl}
+                  alt=""
+                  width={510}
+                  height={250}
+                />
+              ) : (
+                <CircularProgress />
+              )}
             </div>
             <div className="flex flex-row mt-[2.5rem] gap-[1.5rem]">
               <Image
-                className="rounded-xl"
-                src="/images/product-details-image.png"
+                className="rounded-xl bg-[#C4C4C4]"
+                src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl"
-                src="/images/product-details-image.png"
+                className="rounded-xl bg-[#C4C4C4]"
+                src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl"
-                src="/images/product-details-image.png"
+                className="rounded-xl bg-[#C4C4C4]"
+                src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl"
-                src="/images/product-details-image.png"
+                className="rounded-xl bg-[#C4C4C4]"
+                src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl"
-                src="/images/product-details-image.png"
+                className="rounded-xl bg-[#C4C4C4]"
+                src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
@@ -75,11 +114,22 @@ const ProductDetails = () => {
           </div>
           <div className="font-Inter w-[45%]">
             <h1 className="text-white font-bold font-Inter text-formHeading">
-              AFW 09 LIBERTY SS
+              {!loader && productDetails.name ? productDetails.name : ""}
             </h1>
             <h3 className="text-[#ffffff80]">American Force</h3>
             <div className="mt-[1.5rem]">
-              <TextRating />
+              {/* <TextRating /> */}
+              {/* <Stack spacing={1} className="text-white">
+                <Rating
+                  className="text-[#F23939]"
+                  name="half-rating-read"
+                  defaultValue={
+                    !loader ? Number(productDetails.loadRating) / 100 : 5
+                  }
+                  precision={0.5}
+                  readOnly
+                />
+              </Stack> */}
             </div>
             <p className="text-[#ffffff80] font-Montserrat mt-[1rem] w-[70%]">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -101,7 +151,7 @@ const ProductDetails = () => {
                 className="text-[#F23939] text-secondContainerHeading font-Montserrat w-fit font-semibold py-[0.65rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
               >
-                $34,500
+                ${!loader && productDetails.price ? productDetails.price : ""}
               </Button>
               <Button
                 className="text-[#F23939] bg-white w-[35%] py-[0.65rem] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
@@ -129,7 +179,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </section>
-      <section className="p-productPagePadding  pt-[3rem] bg-black">
+      {/* <section className="p-productPagePadding  pt-[3rem] bg-black">
         <div className="flex flex-row justify-between">
           <div className="w-[60%]">
             <div className="flex flex-row text-white justify-between w-[80%]">
@@ -249,8 +299,8 @@ const ProductDetails = () => {
             <p>0</p>
           </div>
         </div>
-      </section>
-      <section className="p-productPagePadding  pt-[3rem] bg-black">
+      </section> */}
+      {/* <section className="p-productPagePadding  pt-[3rem] bg-black">
         <h1 className="text-white font-heading text-heading uppercase font-bold">
           Top Deals of the Month
         </h1>
@@ -261,11 +311,8 @@ const ProductDetails = () => {
         <div className="flex flex-row gap-[2rem] mt-[3rem]">
           <DealsCard />
           <DealsCard />
-          {/* <DealsCard /> */}
-          {/* <DealsCard />
-          <DealsCard /> */}
         </div>
-      </section>
+      </section> */}
       <section className="p-productPagePadding  pt-[3rem] bg-black">
         <FooterAbove />
       </section>

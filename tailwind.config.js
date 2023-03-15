@@ -15,7 +15,9 @@ module.exports = {
         maxWidth: "633px",
         maxHeight: "676px",
       },
-
+      backgroundSize: {
+        "100%": "100%",
+      },
       flex: {
         5: "50%",
       },
