@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -76,23 +74,19 @@ const Login = () => {
 
     console.log(errorMessage);
 
+    if (userLoginData.email === "" || userLoginData.password === "") {
+      setUserDefinedError("Enter valid Email and Password");
+    } else if (!regexEmail.test(userLoginData.email)) {
+      setUserDefinedError("Please Enter a valid Email!");
+    }
     //to clean stored error message
     dispatch(errorCleanUp());
     //to clean stored message
     dispatch(messageCleanUp());
 
-    if (userLoginData.email === "" || userLoginData.password === "") {
-      setUserDefinedError("Enter valid Email and Password");
-    } else if (!regexEmail.test(userLoginData.email)) {
-      setUserDefinedError("Please Enter a valid Email!");
-    } else {
+    if (userLoginData) {
       dispatch(loginUser(userLoginData));
     }
-    // if (/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/.test(userLoginData.email)) {
-    //   setUserDefinedError("Please Enter a valid Email!");
-    // } else if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(userLoginData.password)) {
-
-    // }
 
     console.log(userMessage);
   };
@@ -226,15 +220,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block h-screen flex-5">
-        <Image
-          className="w-full h-full"
-          src="/images/login.png"
-          alt=""
-          width={100}
-          height={100}
-        />
-      </div>
+      <div className="hidden md:block h-screen flex-5 bg-loginImage bg-no-repeat"></div>
     </div>
     // </AuthGuard>
   );
