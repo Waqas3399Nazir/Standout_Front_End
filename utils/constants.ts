@@ -1,1 +1,1 @@
-export const SS_TOKEN = "ScanerZToken";
+export const SS_TOKEN = "SSToken";

@@ -118,7 +118,6 @@ const Register = () => {
 
   const registerUserHandler = (event: any) => {
     event.preventDefault();
-    console.log(userData);
     //to clean stored error message
     dispatch(errorCleanUp());
     //to clean stored message

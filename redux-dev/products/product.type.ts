@@ -25,6 +25,7 @@ export interface IproductDetails {
   updatedAt: string;
   width: string;
   yearIntroduced: any;
+  brandProduct: any;
 }
 
 export interface IproductSate {

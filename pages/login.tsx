@@ -28,8 +28,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
-//import RouteGaurd from "@/components/RouteGaurd";
-import AuthGuard from "@/components/AuthGuard";
 
 const Login = () => {
   const router = useRouter();
@@ -65,15 +63,10 @@ const Login = () => {
   const loader = useSelector(activityInProgress);
   const userData = useSelector(user);
 
-  console.log(errorMessage);
-
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const loginUserHandler = (event: any) => {
     event.preventDefault();
-
-    console.log(errorMessage);
-
     if (userLoginData.email === "" || userLoginData.password === "") {
       setUserDefinedError("Enter valid Email and Password");
     } else if (!regexEmail.test(userLoginData.email)) {
@@ -87,8 +80,6 @@ const Login = () => {
     if (userLoginData) {
       dispatch(loginUser(userLoginData));
     }
-
-    console.log(userMessage);
   };
 
   useEffect(() => {

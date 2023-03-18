@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FooterAbove from "@/components/FooterAbove";
@@ -25,38 +25,81 @@ import {
   activityInProgress,
   error,
 } from "@/redux-dev/products/product.selector";
+import {
+  addProductToCart,
+  productQtyInCart,
+  getUserCartProducts,
+} from "@/redux-dev/cart/cart.slice";
+import { cartQty, message, cartError } from "@/redux-dev/cart/cart.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 //testing end
 
 const ProductDetails = () => {
   const router = useRouter();
-  // console.log(router, "router");
-  console.log(router.query.productId);
+  const [productQty, setProductQty] = useState(0);
+  const [userDefinedError, setUserDefinedError] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
   const productDetails = useSelector(product);
   const loader = useSelector(activityInProgress);
   const errorMessage = useSelector(error);
+  const cartSuccessMessage = useSelector(message);
+  const cartErrorMessage = useSelector(cartError);
 
-  console.log(productDetails);
+  const incrementProductQty = () => {
+    if (productQty < 10) {
+      setProductQty(productQty + 1);
+    }
+  };
+
+  const decrementProductQty = () => {
+    if (productQty > 0) {
+      setProductQty(productQty - 1);
+    }
+  };
+
+  const navigateToCartPage = () => {
+    router.push("/cart");
+  };
+
+  const addToCartHandler = (productId: number) => {
+    if (productQty > 0 && productQty < 11) {
+      setUserDefinedError("");
+      dispatch(addProductToCart({ productId, quantity: productQty }));
+    } else {
+      setUserDefinedError("Quantity must be greater than 0 and less then 10!");
+    }
+  };
 
   useEffect(() => {
-    //to clean any stored errors
     dispatch(errorCleanUp());
-
-    //get Single Product Detail
-    console.log(router.query);
     if (router.query.productId) {
       dispatch(getSingleProduct(router.query.productId));
     }
   }, [router.query.productId]);
+
+  useEffect(() => {
+    dispatch(getUserCartProducts());
+  }, [cartSuccessMessage]);
+
   return (
     <>
       <Header />
       <section className="p-productPagePadding pt-[0rem] bg-black">
-        <BreadCrumb />
+        <BreadCrumb
+          brandName={
+            !loader && productDetails.brandProduct
+              ? productDetails.brandProduct.brandName
+              : ""
+          }
+          productName={
+            !loader && productDetails.name ? productDetails.name : ""
+          }
+        />
       </section>
       <section className="p-productPagePadding pt-[0rem] bg-black">
         <div className="flex flex-row gap-[10%]">
@@ -116,7 +159,11 @@ const ProductDetails = () => {
             <h1 className="text-white font-bold font-Inter text-formHeading">
               {!loader && productDetails.name ? productDetails.name : ""}
             </h1>
-            <h3 className="text-[#ffffff80]">American Force</h3>
+            <h3 className="text-[#ffffff80]">
+              {!loader && productDetails.brandProduct
+                ? productDetails.brandProduct.brandName
+                : ""}
+            </h3>
             <div className="mt-[1.5rem]">
               {/* <TextRating /> */}
               {/* <Stack spacing={1} className="text-white">
@@ -139,11 +186,17 @@ const ProductDetails = () => {
             <div className="flex flex-row mt-[1.5rem] gap-x-4">
               <p className="text-[#ffffff80] font-Poppins">Quantity</p>
               <div className="flex flex-row items-center px-[0.5rem] border-2 border-white">
-                <RemoveIcon className="text-[#ffffff80]  hover:text-[#F23939]" />
+                <RemoveIcon
+                  className="text-[#ffffff80]  hover:text-[#F23939]"
+                  onClick={decrementProductQty}
+                />
                 <p className="text-white font-medium text-homeSubHeading mx-[1rem] my-[0.25rem]">
-                  1
+                  {productQty}
                 </p>
-                <AddIcon className="text-[#ffffff80] hover:text-[#F23939]" />
+                <AddIcon
+                  className="text-[#ffffff80] hover:text-[#F23939]"
+                  onClick={incrementProductQty}
+                />
               </div>
             </div>
             <div className="flex flex-row gap-[1.25rem]">
@@ -161,17 +214,64 @@ const ProductDetails = () => {
                 (610) 426-3025
               </Button>
             </div>
+            <div className="mt-[1.5rem] mb-[-1rem] w-fit">
+              {cartErrorMessage.message ||
+              cartSuccessMessage ||
+              userDefinedError ? (
+                <Stack
+                  className={
+                    cartErrorMessage.message
+                      ? "mb-4 border-red-500"
+                      : "mb-4 border-green-500"
+                  }
+                  sx={{ width: "100%" }}
+                  spacing={2}
+                  color="#FF445A"
+                >
+                  <Alert
+                    variant="outlined"
+                    severity={
+                      cartErrorMessage.message || userDefinedError
+                        ? "warning"
+                        : "success"
+                    }
+                    color={
+                      cartErrorMessage.message || userDefinedError
+                        ? "error"
+                        : "success"
+                    }
+                  >
+                    <p
+                      className={
+                        cartErrorMessage.message || userDefinedError
+                          ? "text-[#FF445A]"
+                          : "text-green-300"
+                      }
+                    >
+                      {cartErrorMessage.message || userDefinedError
+                        ? cartErrorMessage.message
+                          ? cartErrorMessage.message
+                          : userDefinedError
+                        : cartSuccessMessage}
+                    </p>
+                  </Alert>
+                </Stack>
+              ) : (
+                ""
+              )}
+            </div>
             <div className="flex flex-row gap-[1.5rem] my-[1.5rem]">
               <Button
                 className="text-[#F23939] bg-white w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
-                //startIcon={<PhonePausedIcon />}
+                onClick={navigateToCartPage}
               >
                 Buy Now
               </Button>
               <Button
                 className="text-[#F23939] bg-white w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
+                onClick={() => addToCartHandler(productDetails.id)}
               >
                 Add To Cart
               </Button>
