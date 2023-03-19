@@ -34,6 +34,7 @@ const initialState: IproductSate = {
     updatedAt: "",
     width: "",
     yearIntroduced: "",
+    brandProduct: {},
   },
   products: [],
   error: {},
@@ -44,11 +45,15 @@ const initialState: IproductSate = {
 export const getAllProducts = createAsyncThunk(
   "getAll/products",
   async (productsDetails: any, { rejectWithValue }) => {
+    const { page, name, minPrice, maxPrice, brandId } = productsDetails;
+    let url;
+    url = `/product/get-products?${page ? `page=${page}&` : ""}${
+      minPrice ? `minPrice=${Number(minPrice)}&` : ""
+    }${maxPrice ? `maxPrice=${Number(maxPrice)}&` : ""}${
+      name ? `name=${name}&` : ""
+    }${brandId ? `brandId=${brandId}&` : ""}`;
     try {
-      const { data } = await axiosInstance().get(
-        "/product/get-products",
-        productsDetails
-      );
+      const { data } = await axiosInstance().get(url);
       return data;
     } catch (error: any) {
       return rejectWithValue(error);
@@ -64,7 +69,6 @@ export const getSingleProduct = createAsyncThunk(
       const { data } = await axiosInstance().get(
         `/product/get-product/${productId}`
       );
-      console.log(data);
       return data;
     } catch (error: any) {
       return rejectWithValue(error);
@@ -98,11 +102,9 @@ const productSlice = createSlice({
       //     code: action.payload.status,
       //     message: action.payload.data.message,
       //   };
-      console.log(state.error);
     });
     builder.addCase(getAllProducts.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
-      console.log(action.payload);
       state.pagesCount = action.payload.numberOfPages;
       state.productsCount = action.payload.products.count;
       state.products = action.payload.products.rows;
@@ -119,7 +121,6 @@ const productSlice = createSlice({
       //     code: action.payload.status,
       //     message: action.payload.data.message,
       //   };
-      console.log(state.error);
     });
 
     builder.addCase(getSingleProduct.fulfilled, (state, action: any) => {

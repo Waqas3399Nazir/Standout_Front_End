@@ -7,11 +7,6 @@ const Search = () => {
   const [selectTedrim, setSelectedTrim] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
 
-  console.log(selectedYear);
-  console.log(selectedMake);
-  console.log(selectTedrim);
-  console.log(selectedModel);
-
   const year = [
     "year",
     "2015",
@@ -28,7 +23,6 @@ const Search = () => {
   const make = ["make", "toyoata", "civic", "testing"];
   const model = ["model", "abc", "def", "ghi", "jkl"];
   const trim = ["trim", "triim", "tmri", "testig"];
-  console.log(year);
 
   return (
     <div className="bg-[#1F2B3E] mx-[11.67%] px-[5.47%] py-[3.1rem]">

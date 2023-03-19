@@ -15,19 +15,22 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div
-      className="rounded-[3rem] min-h-full"
+      className="rounded-[3rem] min-h-full cursor-pointer"
       onClick={navigateToProductDetailsPage}
     >
       <div className="bg-[#C4C4C4] rounded-t-[0.5rem]">
         <Image
           className="w-[75%] h-[75%] m-auto"
-          src={product.photoUrl}
+          src={
+            product.photoUrl ? product.photoUrl : ""
+            //dumy image to be used here
+          }
           alt=""
           width={100}
           height={100}
         />
       </div>
-      <div className="bg-[#F23939] py-[10px] px-[1.75rem] rounded-[2rem] w-fit ml-[17%] mt-[-1.55rem] absolute">
+      <div className="bg-[#F23939] py-[10px] px-[1.75rem] rounded-[2rem] w-fit ml-[15.5%] mt-[-1.55rem] absolute">
         <p className="text-white">${product.price}</p>
       </div>
       <div className="bg-white py-[2.5rem] px-[7%] rounded-b-[0.5rem]">
@@ -35,13 +38,13 @@ const ProductCard = ({ product }: Props) => {
           {product.name}
         </h1>
         <h3 className="text-[#464646] text-homeSubHeading font-Inter">
-          American Force
+          {product.brandProduct.brandName}
         </h3>
         <div className="flex flex-row  mt-[1.5rem] font-Montserrat">
           <div className="flex flex-col w-[65%]">
             <h3 className="font-normal text-sm text-black">Brand</h3>
             <h1 className="font-semibold text-black text-homeSubHeading">
-              American Force
+              {product.brandProduct.brandName}
             </h1>
           </div>
           <div className="flex flex-col">

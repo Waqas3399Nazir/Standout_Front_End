@@ -8,12 +8,21 @@ import Router, { useRouter } from "next/router";
 import { SS_TOKEN } from "@/utils/constants";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
+//testing start
+import { getUserCartProducts } from "@/redux-dev/cart/cart.slice";
+import { cartQty } from "@/redux-dev/cart/cart.selector";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux-dev/store";
+//testing end
 
 const Header = () => {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [showHideDropdown, setShowHideDropdwon] = useState(false);
   const [showHideBtns, setShowHideBtns] = useState(true);
+
+  const productsInCart = useSelector(cartQty);
 
   const showHideHandler = () => {
     setShowHideDropdwon(!showHideDropdown);
@@ -33,12 +42,16 @@ const Header = () => {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch(getUserCartProducts());
+  }, []);
+
   return (
     <header className="h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
       <nav className="w-[52%]  float-right text-white">
         <ul className="mx-[13.66%] mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
           <li className="">
-            <Link className="cursor-pointer" href="/">
+            <Link className="cursor-pointer" href="/product?page=1">
               Store
             </Link>
           </li>
@@ -62,7 +75,11 @@ const Header = () => {
           </li> */}
           <li className="inline align-middle">
             <Link href="/cart">
-              <Badge badgeContent={4} color="error" className="cursor-pointer">
+              <Badge
+                badgeContent={productsInCart}
+                color="error"
+                className="cursor-pointer"
+              >
                 <ShoppingCartIcon />
               </Badge>
             </Link>

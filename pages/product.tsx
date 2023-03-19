@@ -17,7 +17,6 @@ import Image from "next/image";
 import Pagination from "@mui/material/Pagination";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-//testing start
 import {
   errorCleanUp,
   getAllProducts,
@@ -29,19 +28,39 @@ import {
   error,
   activityInProgress,
 } from "@/redux-dev/products/product.selector";
+
+import {
+  getAllBrands,
+  brandsErrorCleanUp,
+} from "@/redux-dev/brands/brands.slice";
+import { brandsCount, brands } from "@/redux-dev/brands/brands.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
-//testing end
+import { useRouter } from "next/router";
 
 const Product = () => {
+  const [productName, setProductName] = useState("");
   const [brand, setBrand] = useState("");
+  //const [brandId, setBrandId] = useState();
+  const [priceRange, setPriceRange] = useState<number[]>([24000, 55000]);
   const [sortByValue, setSortByValue] = useState("");
-
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const numberOfPages = useSelector(pageCount);
+  const numberOfProducts = useSelector(productsCount);
+  const getProducts = useSelector(products);
+  const errorMessage = useSelector(error);
+  const loader = useSelector(activityInProgress);
+  const totalBrands = useSelector(brands);
   const [pageValue, setPageValue] = useState({
     start: 1,
     middle: 2,
     end: 3,
+  });
+
+  const chooseBrand = totalBrands.map((brand: any) => {
+    return brand.brandName;
   });
 
   const incremntPageHandler = () => {
@@ -51,8 +70,6 @@ const Product = () => {
       middle: pageValue.middle + 1,
       end: pageValue.end + 1,
     });
-    // const value = pageValue.start;
-    dispatch(getAllProducts(pageValue.start));
   };
 
   const decrementPageHandler = () => {
@@ -62,38 +79,68 @@ const Product = () => {
       middle: pageValue.middle - 1,
       end: pageValue.end - 1,
     });
-    dispatch(getAllProducts(pageValue.start));
   };
 
   const onPageClickHandler = (pageNumber: number) => {
-    console.log(pageNumber);
-    dispatch(getAllProducts(pageNumber));
+    router.push({
+      pathname: "/product",
+      query: {
+        page: pageNumber,
+        minPrice: router.query.minPrice,
+        maxPrice: router.query.maxPrice,
+        name: router.query.name,
+        brandId: router.query.brandId,
+      },
+    });
+    // }
   };
 
-  // const currentPage =
-
-  const chooseBrand = [
-    "Choose Brand",
-    "Brand 1",
-    "Brand 2",
-    "Brand 3",
-    "Brand 4",
-    "Brand 5",
-  ];
-
-  //testing start
-  const dispatch = useDispatch<AppDispatch>();
-  const numberOfPages = useSelector(pageCount);
-  const numberOfProducts = useSelector(productsCount);
-  const getProducts = useSelector(products);
-  const errorMessage = useSelector(error);
-  const loader = useSelector(activityInProgress);
+  //get all filter products
+  const filterProducts = () => {
+    // this should be handled on backend
+    const findBrand: any = totalBrands.find((filterBrand: any) => {
+      return filterBrand.brandName === brand;
+    });
+    router.push({
+      query: {
+        page: 1,
+        name: productName,
+        brandId: findBrand?.id,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
+      },
+    });
+  };
 
   useEffect(() => {
-    dispatch(getAllProducts(""));
-  }, []);
+    if (
+      router.query.page ||
+      router.query.minPrice ||
+      router.query.maxPrice ||
+      router.query.name ||
+      router.query.brandId
+    )
+      dispatch(
+        getAllProducts({
+          page: router.query.page,
+          minPrice: router.query.minPrice,
+          maxPrice: router.query.maxPrice,
+          name: router.query.name,
+          brandId: router.query.brandId,
+        })
+      );
+  }, [
+    router.query.page,
+    router.query.minPrice,
+    router.query.maxPrice,
+    router.query.name,
+    router.query.brandId,
+  ]);
 
-  //testing end
+  useEffect(() => {
+    //get all brands
+    dispatch(getAllBrands());
+  }, []);
 
   const sortBy = ["Select", "Newest", "Oldest", "Out Dated"];
   return (
@@ -119,22 +166,13 @@ const Product = () => {
             <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
               Search your item
             </p>
-            <div className="bg-white rounded">
+            <div className="bg-white flex items-center rounded h-[3.5rem]">
               <InputBase
                 className="w-[80%]"
-                //  className={classes.location_item}
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="Search here"
-                inputProps={{ "aria-label": "search google maps" }}
+                placeholder="Product Name"
+                onChange={(event) => setProductName(event.target.value)}
               />
-              <IconButton
-                //   className={classes.location_icon}
-                type="button"
-                sx={{ p: "10px" }}
-                aria-label="search"
-              >
-                <SearchIcon />
-              </IconButton>
             </div>
             <div className="mt-[1.25rem] h-[2.75rem]">
               <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
@@ -143,12 +181,16 @@ const Product = () => {
               <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem]">
                 Price range
               </p>
-              <PriceRangeSlider />
+              <PriceRangeSlider
+                defaultPriceRange={priceRange}
+                selectPriceRange={setPriceRange}
+              />
             </div>
             <Button
               className="bg-[#F23939] text-white w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
               variant="contained"
               endIcon={<EastIcon />}
+              onClick={filterProducts}
             >
               Find Item
             </Button>
@@ -181,34 +223,7 @@ const Product = () => {
                   })}
                 </Grid>
               )}
-              {/* <Grid container spacing={4}>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-                <Grid item xs={6} md={6}>
-                  <ProductCard />
-                </Grid>
-              </Grid> */}
               <div className="text-white flex flex-row gap-[1rem] my-[5rem] justify-center">
-                {/* <h1>Pagination left</h1> */}
-                {/* <Pagination
-                  className="text-[#F23939] bg-white w-fit m-auto"
-                  count={3}
-                  variant="outlined"
-                  shape="rounded"
-                /> */}
                 <button
                   onClick={decrementPageHandler}
                   disabled={pageValue.start <= 1 ? true : false}
