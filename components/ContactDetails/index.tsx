@@ -59,17 +59,11 @@ const ContactDetails = () => {
         <div className="bg-white rounded">
           <InputBase
             className="w-[80%]"
-            //  className={classes.location_item}
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search here"
             inputProps={{ "aria-label": "search google maps" }}
           />
-          <IconButton
-            //   className={classes.location_icon}
-            type="button"
-            sx={{ p: "10px" }}
-            aria-label="search"
-          >
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
         </div>
