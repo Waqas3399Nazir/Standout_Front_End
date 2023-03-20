@@ -8,6 +8,7 @@ const axiosInstance = () => {
   //setting the enviroment
   let url = "http://localhost:4000";
   if (process.env.NODE_ENV === "development") {
+    url = "http://68.183.25.97";
   } else if (process.env.NODE_ENV === "production") {
   } else if (process.env.NODE_ENV === "test") {
   }
