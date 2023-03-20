@@ -19,7 +19,7 @@ const Dropdown = ({ showHide }: Props) => {
           <li className="px-[0.75rem] cursor-pointer py-[3px] text-sm font-bold mb-[3px] hover:bg-black hover:text-white">
             Username
           </li>
-          <hr className="bg-black h-[0.15rem]" />
+          <hr className="border-black border-[1px]" />
           <li className="px-[0.75rem] cursor-pointer py-[3px] mt-[3px] hover:bg-black hover:text-white">
             Profile Setting
           </li>

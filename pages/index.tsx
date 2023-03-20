@@ -23,58 +23,52 @@ export default function Home() {
       </Head>
       <main>
         <Header />
-        <section className="pl-[10rem] bg-black bg-firstSectionImage bg-contain bg-no-repeat bg-right">
-          <div className="pt-[7.69rem] pb-[9.63rem] ">
-            <h1 className="w-[55%] text-mainHeading text-white uppercase font-normal tracking-tighter font-heading tracking-headingSpace">
+        <section className="px-[10%] sm:w-full sm:px-[0] sm:pl-[10rem] bg-black bg-firstSectionImage bg-contain bg-no-repeat bg-right">
+          <div className="pt-[3rem] sm:pt-[7.69rem] pb-[9.63rem] ">
+            <h1 className="text-6xl sm:w-[55%] sm:px-[0] sm:text-mainHeading text-white uppercase font-normal tracking-tighter font-heading tracking-headingSpace">
               Wheel and Tire Packages
             </h1>
             <Image
-              className="w-[21%] h-[2.4rem] mt-[2rem]"
+              className="mt-[0.75rem] sm:w-[21%] h-[2.4rem] sm:mt-[2rem]"
               src="/images/line.svg"
               alt=""
               width={100}
               height={100}
             />
-            <p className="mt-[1.19rem] text-white text-homeSubHeading font-normal font-Inter">
+            <p className="w-[80%] sm:w-full mt-[1.19rem] text-white text-homeSubHeading font-normal font-Inter">
               $100 Off Wheel & Tire Packages when Picked up locally
             </p>
-            <div className="mt-[6rem] text-white">
-              <button className="text-homeButtonText uppercase font-bold py-[12px] px-[2.28%] bg-[#F23939] mr-[1rem] rounded-[2.5px]">
+            <div className="mt-[3rem] sm:mt-[6rem] text-white">
+              <button className="w-full sm:w-fit text-homeButtonText uppercase font-bold py-[12px] px-[2.28%] bg-[#F23939] mr-[1rem] rounded-[2.5px]">
                 search wheels by vehicle
               </button>
-              <button className="text-homeButtonText uppercase font-bold py-[12px] px-[2.28%] bg-[#F23939] rounded-[2.5px]">
+              <button className="w-full sm:w-fit mt-[1rem] sm:mt-[0] text-homeButtonText uppercase font-bold py-[12px] px-[2.28%] bg-[#F23939] rounded-[2.5px]">
                 search wheels by size and brand
               </button>
             </div>
           </div>
         </section>
-        <section className="mt-[-4.375rem] absolute w-full">
+        <section className="mt-[-6rem] sm:mt-[-4.375rem] absolute z-10 w-full">
           <Search />
         </section>
-        <section className="pl-[10rem] bg-secondSectionImage bg-cover">
-          <div className="pt-[15.25rem] pb-[6.56rem]">
-            <p className="text-secondContainerHeading uppercase font-normal">
+        <section className="px-[10%] sm:px-[0] w-full sm:pl-[10rem] bg-secondSectionImage bg-cover">
+          <div className="pt-[18rem] sm:pt-[15.25rem] pb-[4rem] sm:pb-[6.56rem]">
+            <p className="text-5xl sm:text-secondContainerHeading uppercase font-normal">
               Check out{" "}
-              <strong className="text-secondContainerHeading text-[#F23939]">
+              <strong className="text-4xl font-medium sm:font-bold sm:text-secondContainerHeading text-[#F23939]">
                 our selection
               </strong>
             </p>
-            <div className="w-[40%] mt-[1rem] ml-[2.5%] float-left">
+            <div className="w-[80%] sm:w-[40%] mt-[1rem] ml-[2.5%] float-left">
               <div className="w-[80%]">
                 <CustomizedProgressBars />
               </div>
             </div>
 
-            <div className="mt-[6.19rem] font-heading tracking-headingSpace not-italic">
-              <h1 className="text-mainHeading uppercase text-black font-normal">
-                Lift
-              </h1>
-              <h1 className="text-mainHeading uppercase text-[#F23939] font-normal">
-                Leveling
-              </h1>
-              <h1 className="text-mainHeading uppercase text-black font-normal">
-                Kits
-              </h1>
+            <div className="mt-[6.19rem] text-7xl sm:text-mainHeading font-normal font-heading uppercase tracking-headingSpace not-italic">
+              <h1 className=" text-black ">Lift</h1>
+              <h1 className=" text-[#F23939] ">Leveling</h1>
+              <h1 className=" text-black">Kits</h1>
             </div>
             <button className="text-white mt-[1rem] text-homeButtonText uppercase font-bold py-[12px] px-[2.28%] bg-[#F23939] rounded-[2.5px]">
               shop all suspensions kits

@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="text-white w-full py-[7.5rem] bg-black px-[13.60%] flex flex-row">
-      <div className="w-[33.33%]">
-        <div className="w-fit m-auto">
-          <ul className="flex flex-col text-lg font-bold content-between gap-y-2">
+    <div className="text-white py-[4rem] flex flex-col sm:text-white w-full sm:py-[7.5rem] bg-black px-[10%] sm:px-[13.60%] sm:flex-row">
+      <div className="w-[100%] sm:w-[33.33%]">
+        <div className="sm:w-fit m-auto">
+          <ul className="font-light sm:flex flex-col text-lg sm:font-bold content-between gap-y-2">
             <li className="text-[#F23939] text-footerItem">Our Site</li>
             <li className="text-footerItem font-normal">Store</li>
             <li className="text-footerItem font-normal">Brands</li>
@@ -22,7 +22,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="w-[33.33%]">
+      <div className="w-[100%] mt-[2rem] sm:w-[33.33%] sm:mt-[0]">
         <div className="w-fit m-auto">
           <ul className="text-lg font-bold">
             <li className=" text-[#F23939] text-footerItem font-bold">
@@ -44,7 +44,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="w-[33.34%]">
+      <div className="w-[100%] h-fit sm:w-[33.34%]">
         <ul>
           <li className="text-[#F23939] text-xl font-bold mt-[1rem] mb-[2.25rem]">
             Subscribe for News and Upcoming <br />
