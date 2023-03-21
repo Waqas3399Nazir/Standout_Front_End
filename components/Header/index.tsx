@@ -56,7 +56,7 @@ const Header = () => {
   return (
     <>
       <header className="hidden sm:block h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
-        <nav className="w-[52%]  float-right text-white">
+        <nav className="sm:w-[100%] lg:w-[52%]  float-right text-white">
           <ul className="mx-[13.66%] mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
             <li className="">
               <Link className="cursor-pointer" href="/product?page=1">
@@ -69,8 +69,8 @@ const Header = () => {
               </Link>
             </li>
             <li className="">
-              <Link className="cursor-pointer" href="/request-code">
-                Request Code
+              <Link className="cursor-pointer" href="/request-quote">
+                Request Quote
               </Link>
             </li>
             <li className="">
@@ -143,7 +143,7 @@ const Header = () => {
         </nav>
       </header>
       <>
-        <header className="w-full bg-black sm:hidden">
+        <header className="block w-full bg-black sm:hidden">
           <MenuIcon
             className="text-white my-[1.5rem] ml-[1.5rem]"
             onClick={mobileNavbarHandler}
@@ -193,8 +193,8 @@ const Header = () => {
                     </Link>
                   </li>
                   <li className="pl-[10%]">
-                    <Link className="cursor-pointer" href="/request-code">
-                      Request Code
+                    <Link className="cursor-pointer" href="/request-quote">
+                      Request Quote
                     </Link>
                   </li>
                   <li className="pl-[10%]">

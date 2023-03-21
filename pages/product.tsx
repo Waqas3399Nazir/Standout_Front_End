@@ -43,7 +43,7 @@ const Product = () => {
   const [productName, setProductName] = useState("");
   const [brand, setBrand] = useState("");
   //const [brandId, setBrandId] = useState();
-  const [priceRange, setPriceRange] = useState<number[]>([24000, 55000]);
+  const [priceRange, setPriceRange] = useState<number[]>([7000, 14000]);
   const [sortByValue, setSortByValue] = useState("");
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -146,7 +146,7 @@ const Product = () => {
   return (
     <>
       <Header />
-      <section className="h-fit">
+      <section className="h-fit hidden lg:block">
         <div className="h-fit bg-black">
           <Image
             className="mt-[-10rem]"
@@ -157,37 +157,49 @@ const Product = () => {
           />
         </div>
       </section>
-      <section className="p-productPagePadding bg-black">
-        <div className="flex flex-row justify-between">
-          <div className="w-[23.70%]">
+      <section className="p-productPagePadding pt-[2rem] pb-[0rem] sm:pb-[5.56rem] sm:pt-[2rem] lg:pt-[5.56rem] bg-black">
+        <div className="flex flex-col sm:flex-col lg:flex-row justify-between">
+          <div className="w-full sm:w-full lg:w-[23.70%]">
             <h1 className="text-white font-bold text-secondContainerHeading font-Inter">
               Filter
             </h1>
-            <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
+            <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[1rem] sm:mb-[2rem] lg:mb-[3rem]">
               Search your item
             </p>
-            <div className="bg-white flex items-center rounded h-[3.5rem]">
-              <InputBase
-                className="w-[80%]"
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Product Name"
-                onChange={(event) => setProductName(event.target.value)}
-              />
+            <div className="flex flex-col gap-[1rem] sm:flex-row sm:gap-[1rem] lg:flex-col lg:gap-[0rem]">
+              <div className="w-full bg-white flex items-center rounded h-[3.5rem]">
+                <InputBase
+                  className="w-[80%]"
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Product Name"
+                  onChange={(event) => setProductName(event.target.value)}
+                />
+              </div>
+              <div className="w-full mt-[0rem] sm:mt-[0rem] lg:mt-[1.25rem] h-[2.75rem]">
+                <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
+              </div>
             </div>
-            <div className="mt-[1.25rem] h-[2.75rem]">
-              <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
-            </div>
-            <div className="mt-[2rem] mb-[1.5rem]">
-              <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem]">
-                Price range
-              </p>
-              <PriceRangeSlider
-                defaultPriceRange={priceRange}
-                selectPriceRange={setPriceRange}
-              />
+            <div className="mt-[2rem] sm:mb-[2rem] lg:mb-[0rem] sm:mt-[2rem] lg:mt-[0rem] flex flex-row gap-[5%] lg:flex-col">
+              <div className="mt-[0rem] w-[50%] lg:w-full mb-[0rem] lg:mt-[2rem] lg:mb-[1.5rem]">
+                <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0rem] lg:mt-[0.625rem]">
+                  Price range
+                </p>
+                <PriceRangeSlider
+                  defaultPriceRange={priceRange}
+                  selectPriceRange={setPriceRange}
+                />
+              </div>
+              <Button
+                className="hidden w-[50%]  sm:flex flex-row bg-[#F23939] text-white lg:w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
+                variant="contained"
+                endIcon={<EastIcon />}
+                onClick={filterProducts}
+              >
+                Find Item
+              </Button>
             </div>
             <Button
-              className="bg-[#F23939] text-white w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
+              className="flex flex-row sm:hidden lg:hidden bg-[#F23939] mb-[1rem] text-white w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
               variant="contained"
               endIcon={<EastIcon />}
               onClick={filterProducts}
@@ -195,14 +207,14 @@ const Product = () => {
               Find Item
             </Button>
           </div>
-          <div className="w-[65%]">
+          <div className="w-full sm:w-full lg:w-[65%]">
             <div className="flex flex-row justify-between">
               <div>
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Showing <strong>20 Products from {numberOfProducts}</strong>
                 </p>
               </div>
-              <div className="flex flex-row gap-x-4">
+              <div className="hidden sm:flex sm:flex-row sm:gap-x-4">
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Sort by
                 </p>
@@ -216,7 +228,7 @@ const Product = () => {
                 <Grid container spacing={4}>
                   {getProducts.map((product: any) => {
                     return (
-                      <Grid key={product.id} item xs={6} md={6}>
+                      <Grid key={product.id} item xs={6} sm={6} md={6}>
                         <ProductCard product={product} />
                       </Grid>
                     );
@@ -261,7 +273,7 @@ const Product = () => {
           </div>
         </div>
       </section>
-      <section className="p-productPagePadding bg-black">
+      <section className="p-productPagePadding pt-[0rem] pb-[0rem] sm:pt-[0rem] sm:pb-[5.56rem] lg:pt-[5.56rem] lg:pb-[5.56rem] bg-black">
         <FooterAbove />
       </section>
       <Footer />
