@@ -35,26 +35,28 @@ const ProductCard = ({ product }: Props) => {
           <h1 className="font-bold text-[#F23939] sm:text-[1rem] lg:text-formHeading font-Inter">
             {product.name}
           </h1>
-          <h3 className="text-[#464646] text-homeSubHeading font-Inter">
+          <h3 className="text-[#464646] sm:text-[0.90rem] lg:text-homeSubHeading font-Inter">
             {product.brandProduct.brandName}
           </h3>
           <div className="flex flex-row  mt-[1.5rem] font-Montserrat">
             <div className="flex flex-col w-[65%]">
-              <h3 className="font-normal text-sm text-black">Brand</h3>
-              <h1 className="font-semibold text-black text-homeSubHeading">
+              <h3 className="font-normal sm:text-[0.90rem] lg:text-sm text-black">
+                Brand
+              </h3>
+              <h1 className="font-semibold text-black sm:text-[0.90rem] lg:text-homeSubHeading">
                 {product.brandProduct.brandName}
               </h1>
             </div>
             <div className="flex flex-col">
               <h3 className="font-normal text-sm text-black">Color</h3>
-              <h1 className="font-semibold text-black text-homeSubHeading">
+              <h1 className="font-semibold text-black sm:text-[0.90rem] lg:text-homeSubHeading">
                 {product.color ? product.color : ""}
               </h1>
             </div>
           </div>
         </div>
       </div>
-      <div className="block sm:hidden">
+      <div className="block sm:hidden" onClick={navigateToProductDetailsPage}>
         <div className="bg-[#C4C4C4] rounded-[0.5rem]">
           <Image
             className="w-[75%] h-[75%] m-auto"

@@ -38,11 +38,8 @@ import { CircularProgress } from "@material-ui/core";
 
 const Register = () => {
   const router = useRouter();
-
   const [showPassword, setShowPassword] = React.useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -50,7 +47,9 @@ const Register = () => {
   };
 
   const [country, setCountry] = useState("");
-
+  const navigateToLoginPage = () => {
+    router.push("/login");
+  };
   const handleCountryChange = (event: SelectChangeEvent) => {
     setCountry(event.target.value as string);
   };
@@ -175,14 +174,14 @@ const Register = () => {
       //to clean stored message
       dispatch(messageCleanUp());
 
-      router.push("/login");
+      router.push(`/email-verification?email=${userData.email}`);
     }
   }, [loader]);
 
   return (
     <div className="flex flex-row h-fit">
-      <div className="flex-5 flex pb-[3rem]">
-        <div className="w-2/3 md:w-1/2 m-auto">
+      <div className="flex-5 flex py-[2rem] sm:py-[3rem]">
+        <div className="w-[80%] text-center sm:w-[75%] lg:w-[65%] m-auto">
           <form method="post">
             <h1 className="text-heading not-italic text-black font-bold">
               Register
@@ -197,14 +196,14 @@ const Register = () => {
                 onChange={handleChange}
               />
               <TextField
-                className="w-full rounded-xl"
+                className="w-full rounded-xl mt-[0.5rem]"
                 id="outlined-email"
                 type="text"
                 placeholder="Last Name"
                 name="lastName"
                 onChange={handleChange}
               />
-              <div className="flex flex-row">
+              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -222,7 +221,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -240,7 +239,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -259,7 +258,7 @@ const Register = () => {
                 />
               </div>
               <TextField
-                className="w-full rounded-xl"
+                className="w-full rounded-xl mt-[0.5rem]"
                 id="outlined-email"
                 type="email"
                 placeholder="E-mail"
@@ -366,7 +365,7 @@ const Register = () => {
             </div>
             <button
               type="submit"
-              className="bg-[#F23939] w-full py-4 rounded-xl text-base text-white font-medium cursor-pointer"
+              className="bg-[#F23939] w-full sm:w-[70%] lg:w-[70%] py-4 rounded-xl text-base text-white font-medium cursor-pointer"
               onClick={registerUserHandler}
             >
               {loader ? (
@@ -376,12 +375,23 @@ const Register = () => {
               )}
             </button>
           </form>
+          <div className="w-full text-center mt-[1.5rem]">
+            <p>
+              Already have an Account?{" "}
+              <strong
+                className="text-[#F23939] cursor-pointer"
+                onClick={navigateToLoginPage}
+              >
+                Login
+              </strong>
+            </p>
+          </div>
           <div className="flex flex-row justify-between mt-[2rem] items-center">
             <hr className="w-2/5 align-middle" />
             <p className="align-middle">Or</p>
             <hr className="w-2/5 align-middle" />
           </div>
-          <div className="flex justify-around md:justify-between mt-4">
+          <div className="flex justify-around gap-[6%] mt-4">
             <Button
               className="capitalize text-black w-[10.75rem] cursor-pointer"
               variant="outlined"

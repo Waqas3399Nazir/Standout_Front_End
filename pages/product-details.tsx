@@ -15,7 +15,6 @@ import Dropdown from "@/components/SelectDropdown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import DealsCard from "@/components/DealsCard";
 import { useRouter } from "next/router";
-//testing start
 import {
   errorCleanUp,
   getSingleProduct,
@@ -35,14 +34,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-//testing end
 
 const ProductDetails = () => {
   const router = useRouter();
   const [productQty, setProductQty] = useState(0);
   const [userDefinedError, setUserDefinedError] = useState("");
-
   const dispatch = useDispatch<AppDispatch>();
   const productDetails = useSelector(product);
   const loader = useSelector(activityInProgress);
@@ -89,7 +85,7 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <section className="p-productPagePadding pt-[0rem] bg-black">
+      <section className="p-productPagePadding pt-[0rem] bg-black hidden sm:hidden lg:block">
         <BreadCrumb
           brandName={
             !loader && productDetails.brandProduct
@@ -101,9 +97,9 @@ const ProductDetails = () => {
           }
         />
       </section>
-      <section className="p-productPagePadding pt-[0rem] bg-black">
-        <div className="flex flex-row gap-[10%]">
-          <div className="w-[54%]">
+      <section className="px-[7%] sm:px-[5%] lg:p-productPagePadding lg:pt-[0rem] bg-black">
+        <div className="flex flex-col sm:flex-row w-full items-center sm:items-start sm:gap-[6%] lg:gap-[8%]">
+          <div className="w-[70%] sm:w-[45%] lg:w-[54%] mt-[1rem] sm:mt-[0rem]">
             <div className="bg-[#C4C4C4] rounded-2xl w-full">
               {!loader && productDetails ? (
                 <Image
@@ -117,7 +113,7 @@ const ProductDetails = () => {
                 <CircularProgress />
               )}
             </div>
-            <div className="flex flex-row mt-[2.5rem] gap-[1.5rem]">
+            <div className="hidden sm:flex flex-row mt-[2.5rem] gap-[1.5rem]">
               <Image
                 className="rounded-xl bg-[#C4C4C4]"
                 src={!loader && productDetails ? productDetails.photoUrl : ""}
@@ -133,21 +129,21 @@ const ProductDetails = () => {
                 height={110}
               />
               <Image
-                className="rounded-xl bg-[#C4C4C4]"
+                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
                 src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl bg-[#C4C4C4]"
+                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
                 src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
                 height={110}
               />
               <Image
-                className="rounded-xl bg-[#C4C4C4]"
+                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
                 src={!loader && productDetails ? productDetails.photoUrl : ""}
                 alt=""
                 width={102}
@@ -155,16 +151,21 @@ const ProductDetails = () => {
               />
             </div>
           </div>
-          <div className="font-Inter w-[45%]">
-            <h1 className="text-white font-bold font-Inter text-formHeading">
-              {!loader && productDetails.name ? productDetails.name : ""}
-            </h1>
+          <div className="font-Inter sm:text-left w-full mt-[1rem] sm:w-[54%] sm:mt-[0rem] lg:w-[45%]">
+            <div className="flex flex-row sm:flex-col gap-[20%]">
+              <h1 className="text-white font-bold font-Inter text-[1.25rem] sm:text-[1.5rem] lg:text-formHeading">
+                {!loader && productDetails.name ? productDetails.name : ""}
+              </h1>
+              <h1 className="text-white font-bold font-Inter text-[1.25rem] sm:hidden">
+                ${!loader && productDetails.price ? productDetails.price : ""}
+              </h1>
+            </div>
             <h3 className="text-[#ffffff80]">
               {!loader && productDetails.brandProduct
                 ? productDetails.brandProduct.brandName
                 : ""}
             </h3>
-            <div className="mt-[1.5rem]">
+            <div className="mt-[0rem]">
               {/* <TextRating /> */}
               {/* <Stack spacing={1} className="text-white">
                 <Rating
@@ -178,19 +179,19 @@ const ProductDetails = () => {
                 />
               </Stack> */}
             </div>
-            <p className="text-[#ffffff80] font-Montserrat mt-[1rem] w-[70%]">
+            <p className="text-[#ffffff80] font-Montserrat mt-[0.40rem] sm:mt-[0.50rem] lg:mt-[0.90rem] w-full sm:w-[90%] lg:w-[70%]">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam
             </p>
             <div className="flex flex-row mt-[1.5rem] gap-x-4">
               <p className="text-[#ffffff80] font-Poppins">Quantity</p>
-              <div className="flex flex-row items-center px-[0.5rem] border-2 border-white">
+              <div className="flex flex-row items-center px-[0.5rem] border-[1px] sm:border-2 border-white">
                 <RemoveIcon
                   className="text-[#ffffff80]  hover:text-[#F23939]"
                   onClick={decrementProductQty}
                 />
-                <p className="text-white font-medium text-homeSubHeading mx-[1rem] my-[0.25rem]">
+                <p className="text-white font-medium text-[0.85rem] sm:text-[1rem] lg:text-homeSubHeading mx-[0.5rem] my-[0.15rem] sm:mx-[1rem] sm:my-[0.25rem]">
                   {productQty}
                 </p>
                 <AddIcon
@@ -201,13 +202,13 @@ const ProductDetails = () => {
             </div>
             <div className="flex flex-row gap-[1.25rem]">
               <Button
-                className="text-[#F23939] text-secondContainerHeading font-Montserrat w-fit font-semibold py-[0.65rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
+                className="text-[#F23939] hidden sm:block sm:text-[1.45rem] lg:text-secondContainerHeading font-Montserrat sm:w-[9rem] lg:w-fit font-semibold sm:py-[0.5rem] lg:py-[0.65rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
               >
                 ${!loader && productDetails.price ? productDetails.price : ""}
               </Button>
               <Button
-                className="text-[#F23939] bg-white w-[35%] py-[0.65rem] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
+                className="text-[#F23939] hidden sm:hidden lg:flex bg-white w-[35%] py-[0.65rem] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
                 startIcon={<PhonePausedIcon />}
               >
@@ -262,14 +263,14 @@ const ProductDetails = () => {
             </div>
             <div className="flex flex-row gap-[1.5rem] my-[1.5rem]">
               <Button
-                className="text-[#F23939] bg-white w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
+                className="text-[#F23939] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
                 onClick={navigateToCartPage}
               >
                 Buy Now
               </Button>
               <Button
-                className="text-[#F23939] bg-white w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
+                className="text-[#F23939] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
                 variant="outlined"
                 onClick={() => addToCartHandler(productDetails.id)}
               >
@@ -413,7 +414,7 @@ const ProductDetails = () => {
           <DealsCard />
         </div>
       </section> */}
-      <section className="p-productPagePadding  pt-[3rem] bg-black">
+      <section className="p-productPagePadding hidden sm:block  sm:pt-[3rem] bg-black">
         <FooterAbove />
       </section>
       <Footer />

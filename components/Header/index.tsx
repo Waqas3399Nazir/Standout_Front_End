@@ -214,7 +214,7 @@ const Header = () => {
                   <li className="inline pl-[10%] align-middle">
                     {showHideBtns ? (
                       <button
-                        className="px-[1rem] py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
+                        className="px-[1rem] py-[0.5rem] w-[70%] sm:w-auto bg-[#F23939] cursor-pointer rounded-md"
                         onClick={naviagteToSignUpPage}
                       >
                         Sign Up
@@ -226,7 +226,7 @@ const Header = () => {
                   <li className="inline pl-[10%]">
                     {showHideBtns ? (
                       <button
-                        className="px-[1rem] py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
+                        className="px-[1rem] py-[0.5rem] w-[70%] sm:w-auto bg-[#F23939] cursor-pointer rounded-md"
                         onClick={naviagteToLoginPage}
                       >
                         Login

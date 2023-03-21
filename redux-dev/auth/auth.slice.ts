@@ -60,6 +60,23 @@ export const verifyToken = createAsyncThunk(
   }
 );
 
+//forgot password API
+export const forgotPassword = createAsyncThunk(
+  "forgot/password",
+  async (email: any, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance().post(
+        "auth/forget-password",
+        email
+      );
+      console.log(data);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "authSlice",
   initialState: { ...initialState, name: "userAuthSlice" },
@@ -125,7 +142,6 @@ const authSlice = createSlice({
         code: action.payload.status,
         message: action.payload.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(verifyToken.fulfilled, (state, action: any) => {
@@ -134,6 +150,27 @@ const authSlice = createSlice({
       state.isValid = action.payload.isValid;
       state.message = action.payload.message;
       console.log(action.payload);
+    });
+
+    //forgot password API
+    builder.addCase(forgotPassword.pending, (state, action: any) => {
+      state.isActivityInProgress = true;
+    });
+
+    builder.addCase(forgotPassword.rejected, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.error = {
+        code: action.payload.status,
+        message: action.payload.message,
+      };
+      console.log(state.error);
+    });
+
+    builder.addCase(forgotPassword.fulfilled, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.message = action.payload.message;
+      console.log(action.payload);
+      console.log(action.payload.message);
     });
   },
 });

@@ -42,6 +42,12 @@ const Login = () => {
     event.preventDefault();
   };
 
+  const navigateToRegisterPage = () => {
+    router.push("/register");
+  };
+  const navigateToResetPassword = () => {
+    router.push("/reset-password");
+  };
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: "",
@@ -102,14 +108,14 @@ const Login = () => {
 
   return (
     // <AuthGuard>
-    <div className="flex flex-row">
-      <div className="flex-5 flex md:flex">
-        <div className="w-2/3 m-auto md:w-1/2 md:m-auto md:">
+    <div className="flex flex-row h-screen">
+      <div className="flex-5 flex">
+        <div className="w-[80%] text-center sm:w-[75%] lg:w-[65%] m-auto">
           <form method="post">
             <h1 className="text-heading not-italic text-black font-bold">
               Login
             </h1>
-            <p className="text-xs non-italic text-black font-semibold">
+            <p className="text-xs mt-[0.5rem] non-italic text-black font-semibold">
               Welcome Back!
             </p>
             <div className="w-full my-8">
@@ -173,7 +179,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="bg-red-600 w-full py-4 rounded-xl text-base text-white font-medium cursor-pointer"
+              className="bg-red-600 w-full sm:w-[70%] lg:w-[70%] py-4 rounded-xl text-base text-white font-medium cursor-pointer"
               onClick={loginUserHandler}
             >
               {loader ? (
@@ -182,7 +188,18 @@ const Login = () => {
                 "Login"
               )}
             </button>
-            <div className="text-center">
+            <div className="w-full text-center mt-[1.5rem]">
+              <p>
+                Don’t have an account? ?{" "}
+                <strong
+                  className="text-[#F23939] cursor-pointer"
+                  onClick={navigateToRegisterPage}
+                >
+                  Sign Up
+                </strong>
+              </p>
+            </div>
+            <div className="text-center" onClick={navigateToResetPassword}>
               <p className="my-8 font-medium text-[#0048B9] cursor-pointer">
                 Forgot Password?
               </p>
@@ -193,7 +210,7 @@ const Login = () => {
             <p className="align-middle">Or</p>
             <hr className="w-2/5 align-middle" />
           </div>
-          <div className="flex justify-around md:justify-between mt-4">
+          <div className="flex justify-around gap-[6%] mt-4">
             <Button
               className="capitalize text-black w-[10.75rem] cursor-pointer"
               variant="outlined"

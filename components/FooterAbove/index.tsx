@@ -9,7 +9,7 @@ import Image from "next/image";
 const FooterAbove = () => {
   return (
     <>
-      <div className="bg-[#F23939] hidden sm:block lg:block relative py-[2.5rem] sm:py-[5.375rem] px-[7.22%] rounded-[2.5rem]">
+      <div className="bg-[#F23939] hidden sm:block lg:block relative py-[2.5rem] sm:py-[3rem] sm:mt-[3rem] lg:py-[5.375rem] px-[7.22%] rounded-[2.5rem]">
         <div className="flex flex-row gap-[7%]">
           <h1 className="text-white font-heading font-bold text-2xl sm:text-heading uppercase">
             Have any question <br /> about us?

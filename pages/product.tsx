@@ -166,7 +166,7 @@ const Product = () => {
             <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[1rem] sm:mb-[2rem] lg:mb-[3rem]">
               Search your item
             </p>
-            <div className="flex flex-col gap-[1rem] sm:flex-row sm:gap-[1rem] lg:flex-col lg:gap-[0rem]">
+            <div className="flex flex-col gap-[1rem]">
               <div className="w-full bg-white flex items-center rounded h-[3.5rem]">
                 <InputBase
                   className="w-[80%]"
@@ -175,7 +175,7 @@ const Product = () => {
                   onChange={(event) => setProductName(event.target.value)}
                 />
               </div>
-              <div className="w-full mt-[0rem] sm:mt-[0rem] lg:mt-[1.25rem] h-[2.75rem]">
+              <div className="w-full sm:mt-[0rem]  h-[2.75rem]">
                 <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
               </div>
             </div>
