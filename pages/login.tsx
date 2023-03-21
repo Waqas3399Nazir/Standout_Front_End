@@ -90,6 +90,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+    alert(process.env.NODE_ENV);
     if (userMessage && !loader) {
       //to clean stored error message
       dispatch(errorCleanUp());
