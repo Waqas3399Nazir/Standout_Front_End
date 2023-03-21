@@ -25,7 +25,7 @@ const Search = () => {
   const trim = ["trim", "triim", "tmri", "testig"];
 
   return (
-    <div className="bg-[#1F2B3E] mx-[11.67%] px-[5.47%] py-[3.1rem]">
+    <div className="rounded-3xl sm:rounded-none bg-[#1F2B3E] mx-[8%] sm:mx-[8%] lg:mx-[11.67%] px-[5.47%] py-[3.1rem]">
       <div className="flex flex-row gap-[4.76%]">
         <div className="w-full">
           <Dropdown dropdownValues={year} selValue={setSelectedYear} />
@@ -41,11 +41,16 @@ const Search = () => {
         <div className="w-full">
           <Dropdown dropdownValues={trim} selValue={setSelectedTrim} />
         </div>
-        <div className="w-full h-full text-homeButtonText">
+        <div className="hidden lg:block w-full h-full text-homeButtonText">
           <button className="text-white text-[1.5rem] bg-[#F23939] w-full py-[1.25rem] mt-[0.5rem] uppercase rounded">
             Shop Wheels
           </button>
         </div>
+      </div>
+      <div className="block text-[1.5rem] w-full lg:hidden">
+        <button className="text-white text-[1.5rem] bg-[#F23939] w-full py-[1.25rem] mt-[1rem] uppercase rounded">
+          Shop Wheels
+        </button>
       </div>
     </div>
   );

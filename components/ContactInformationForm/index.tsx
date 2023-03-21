@@ -4,10 +4,10 @@ import { TextField } from "@mui/material";
 
 const ContactInformationForm = () => {
   return (
-    <div className="bg-[#1F2B3E] px-[5rem] py-[5rem]">
+    <div className="bg-[#1F2B3E] rounded-lg sm:rounded-none p-[1.5rem] sm:p-[3rem] lg:p-[5rem]">
       <div>
         <FormHeading heading="Contact Information" />
-        <div className="mt-[1.5rem] flex flex-row gap-[1.5rem]">
+        <div className="mt-[1.5rem] flex flex-col sm:flex-row gap-[1.5rem]">
           <TextField
             className="w-full bg-white text-[#6E7684] rounded"
             //id="outlined-email"
@@ -25,7 +25,7 @@ const ContactInformationForm = () => {
             //  onChange={handleChange}
           />
         </div>
-        <div className="mt-[1.5rem] flex flex-row gap-[1.5rem]">
+        <div className="mt-[1.5rem] flex flex-col sm:flex-row gap-[1.5rem]">
           <TextField
             className="w-full bg-white text-[#6E7684] rounded"
             //id="outlined-email"
@@ -44,9 +44,9 @@ const ContactInformationForm = () => {
           />
         </div>
       </div>
-      <div className="mt-[2.5rem]">
+      <div className="mt-[1.5rem] sm:mt-[2.5rem]">
         <FormHeading heading="Truck Information" />
-        <div className="mt-[1.5rem] flex flex-row gap-[1.5rem]">
+        <div className="mt-[1.5rem] flex flex-col sm:flex-row gap-[1.5rem]">
           <TextField
             className="w-full bg-white text-[#6E7684] rounded"
             //id="outlined-email"
@@ -64,7 +64,7 @@ const ContactInformationForm = () => {
             //  onChange={handleChange}
           />
         </div>
-        <div className="mt-[1.5rem] flex flex-row gap-[1.5rem]">
+        <div className="mt-[1.5rem] flex flex-col sm:flex-row gap-[1.5rem]">
           <TextField
             className="w-full bg-white text-[#6E7684] rounded"
             //id="outlined-email"
@@ -83,11 +83,11 @@ const ContactInformationForm = () => {
           />
         </div>
       </div>
-      <div className="mt-[2.5rem]">
+      <div className="mt-[1.5rem] sm:mt-[2.5rem]">
         <FormHeading heading="Message" />
         <div className="mt-[1rem]">
           <textarea
-            className="p-[1.25rem] w-full"
+            className="p-[1.25rem] w-full rounded-md sm:rounded-none"
             name="message"
             placeholder="Please Leave us a detailed message here"
             rows={8}
@@ -96,7 +96,7 @@ const ContactInformationForm = () => {
         </div>
       </div>
       <div className="text-center w-full">
-        <button className="text-white text-base bg-[#F23939] mt-[2.5rem] py-[1.25rem] px-[10%]">
+        <button className="w-full sm:w-fit rounded-lg sm:rounded-none text-white text-base bg-[#F23939] mt-[1rem] sm:mt-[1.5rem] lg:mt-[2.5rem] py-[1.25rem] px-[10%]">
           SUBMIT
         </button>
       </div>

@@ -22,7 +22,7 @@ export default function PriceRangeSlider({
   return (
     <Box sx={{ width: 300 }}>
       <Slider
-        className="text-[#F23939]"
+        className="text-[#F23939] yy-[0rem] sm:py-[0rem] w-full sm:w-[80%] lg:w-[95%]"
         value={defaultPriceRange}
         onChange={handleChange}
         valueLabelDisplay="auto"

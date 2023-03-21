@@ -97,10 +97,12 @@ const ProductCart = ({ product, checkedOrNot }: Props) => {
 
   //testing end
   return (
-    <div className="bg-[#1F2B3E] mb-[1rem] py-[1.5rem] justify-between px-[1.5rem] rounded-[0.5rem] flex flex-row">
+    <div className="bg-[#1F2B3E] mb-[1rem] py-[0.5rem] sm:py-[1.5rem] justify-between px-[0.5rem] sm:px-[1rem] lg:px-[1.5rem] rounded-[0.5rem] flex flex-row">
       <div className="flex flex-row items-center">
         <div>
           <Checkbox
+            className="p-[0.25rem] sm:p-[0.5rem]"
+            size="small"
             onChange={(event) => checkBoxHandler(event)}
             checked={checkedOrNot ? checkedOrNot : checkboxChecked}
             sx={{
@@ -111,7 +113,7 @@ const ProductCart = ({ product, checkedOrNot }: Props) => {
             }}
           />
         </div>
-        <div className="bg-[#C4C4C4] rounded w-[11.75rem] h-[9.5rem] p-[0.5rem]">
+        <div className="bg-[#C4C4C4] rounded w-[5.5rem] h-[4.5rem] sm:w-[8rem] sm:h-[6.5rem] lg:w-[11.75rem] lg:h-[8.5rem] p-[0.5rem]">
           <Image
             className="w-full h-full"
             src={
@@ -122,38 +124,38 @@ const ProductCart = ({ product, checkedOrNot }: Props) => {
             height={100}
           />
         </div>
-        <div className="ml-[1rem]">
-          <h1 className="font-Inter text-white">
+        <div className="ml-[0.35rem] sm:ml-[0.75rem] lg:ml-[1rem]">
+          <h1 className="font-Inter  text-white">
             {product.productCart.name ? product.productCart.name : ""}
           </h1>
-          <h3 className="font-Poppins text-[#00000080]">
+          <h3 className="font-Poppins text-[0.75rem] sm:text-[1rem] text-[#00000080]">
             No Brand, Color Family:{" "}
             {product.productCart.color ? product.productCart.color : ""}
           </h3>
-          <div className="flex flex-row w-fit items-center mt-[1rem] px-[0.5rem] border-2 border-white">
+          <div className="flex flex-row w-fit items-center  mt-[0.25rem] sm:mt-[1rem] px-[0.5rem] border-[1px] sm:border-2 border-white">
             <RemoveIcon
-              className="text-[#ffffff80]  hover:text-[#F23939]"
+              className="text-[#ffffff80] text-[1rem] sm:text-[1.5rem]  hover:text-[#F23939]"
               onClick={decrementProductQty}
             />
-            <p className="text-white font-medium text-homeSubHeading mx-[1rem] my-[0.25rem]">
+            <p className="text-white font-medium text-[0.75rem] sm:text-homeSubHeading mx-[0.5rem] sm:mx-[1rem] my-[0rem] sm:my-[0.25rem]">
               {productQty}
             </p>
             <AddIcon
-              className="text-[#ffffff80] hover:text-[#F23939]"
+              className="text-[#ffffff80] text-[1rem] sm:text-[1.5rem] hover:text-[#F23939]"
               onClick={incrementProductQty}
             />
           </div>
         </div>
       </div>
-      <div className="self-end mr-[1rem] mb-[1rem]">
-        <h3 className="font-Inter font-semibold text-white text-homeButtonText">
+      <div className="self-end sm:mr-[1rem] sm:mb-[1rem]">
+        <h3 className="font-Inter font-semibold text-white text-[0.90rem] sm:text-homeButtonText">
           {"$" + productPrice}
         </h3>
-        <div className="flex flex-row text-[#ffffff80] gap-[0.5rem] items-center mt-[0.75rem]">
+        <div className="flex flex-row text-[#ffffff80] gap-[0.5rem] items-center sm:mt-[0.75rem]">
           {/* <FavoriteBorderIcon /> */}
           <RiDeleteBin5Line
-            className="hover:text-[#F23939]"
-            fontSize="1.25rem"
+            className="hover:text-[#F23939] text-[1rem] sm:text-[1.25rem]"
+            //fontSize="1.25rem"
             onClick={deleteProductInCart}
           />
         </div>
