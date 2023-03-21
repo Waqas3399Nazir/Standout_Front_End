@@ -144,6 +144,7 @@ const Register = () => {
     } else if (!regexCompanyName.test(userData.companyOrOrganization)) {
       setUserDefinedError("Please Enter Valid Company Name!");
     } else if (!regexPhoneNumber.test(userData.phoneNumber)) {
+      alert(userData.phoneNumber);
       setUserDefinedError("Please Enter Valid Phone Number!");
     } else if (!regexApartmentAddress.test(userData.aptOrSuite)) {
       setUserDefinedError("Please Enter Valid Apartment Address!");
@@ -165,14 +166,6 @@ const Register = () => {
     } else {
       setUserDefinedError("Please Enter Same Password!");
     }
-    // if (userData) {
-    //   if (userData.password === userData.confirmPassword) {
-    //     setUserDefinedError("");
-    //     dispatch(registerUser(userData));
-    //   } else {
-    //     setUserDefinedError("Please Enter Same Password!");
-    //   }
-    // }
   };
 
   useEffect(() => {

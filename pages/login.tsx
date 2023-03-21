@@ -67,6 +67,11 @@ const Login = () => {
 
   const loginUserHandler = (event: any) => {
     event.preventDefault();
+    if (userLoginData.email === "" || userLoginData.password === "") {
+      setUserDefinedError("Enter valid Email and Password");
+    } else if (!regexEmail.test(userLoginData.email)) {
+      setUserDefinedError("Please Enter a valid Email!");
+    }
     //to clean stored error message
     dispatch(errorCleanUp());
     //to clean stored message
