@@ -77,6 +77,20 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
+//update password
+export const updatePassword = createAsyncThunk(
+  "update/password",
+  async (user: any, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance().post("auth/update-password", user);
+      console.log(data);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "authSlice",
   initialState: { ...initialState, name: "userAuthSlice" },
@@ -167,6 +181,28 @@ const authSlice = createSlice({
     });
 
     builder.addCase(forgotPassword.fulfilled, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.message = action.payload.message;
+      console.log(action.payload);
+      console.log(action.payload.message);
+    });
+
+    //updatePassword
+    //forgot password API
+    builder.addCase(updatePassword.pending, (state, action: any) => {
+      state.isActivityInProgress = true;
+    });
+
+    builder.addCase(updatePassword.rejected, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.error = {
+        code: action.payload.status,
+        message: action.payload.message,
+      };
+      console.log(state.error);
+    });
+
+    builder.addCase(updatePassword.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
       state.message = action.payload.message;
       console.log(action.payload);

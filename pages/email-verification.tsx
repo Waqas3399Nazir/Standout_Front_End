@@ -40,14 +40,14 @@ const EmailVerification = () => {
           </p>
         </div>
       </div>
-      <div className="flex-5 hidden lg:block bg-registerImage">
-        {/* <Image
+      <div className="flex-5 hidden lg:block">
+        <Image
           className="w-full h-screen"
           src="/images/signup-image.png"
           alt=""
           width={100}
           height={100}
-        /> */}
+        />
       </div>
     </div>
   );

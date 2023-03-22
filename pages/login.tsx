@@ -13,7 +13,7 @@ import { FaFacebook } from "react-icons/fa";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
-
+import Image from "next/image";
 import {
   loginUser,
   errorCleanUp,
@@ -77,13 +77,11 @@ const Login = () => {
       setUserDefinedError("Enter valid Email and Password");
     } else if (!regexEmail.test(userLoginData.email)) {
       setUserDefinedError("Please Enter a valid Email!");
-    }
-    //to clean stored error message
-    dispatch(errorCleanUp());
-    //to clean stored message
-    dispatch(messageCleanUp());
-
-    if (userLoginData) {
+    } else {
+      //to clean stored error message
+      dispatch(errorCleanUp());
+      //to clean stored message
+      dispatch(messageCleanUp());
       dispatch(loginUser(userLoginData));
     }
   };
@@ -229,7 +227,15 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block h-screen flex-5 bg-loginImage bg-no-repeat"></div>
+      <div className="hidden md:block flex-5 ">
+        <Image
+          className="w-full h-screen"
+          src="/images/login.png"
+          alt=""
+          width={100}
+          height={100}
+        />
+      </div>
     </div>
     // </AuthGuard>
   );

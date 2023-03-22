@@ -54,6 +54,17 @@ const ResetPassword = () => {
   };
 
   useEffect(() => {
+    if (successMessage && !loader) {
+      //to clean stored error message
+      dispatch(errorCleanUp());
+      //to clean stored message
+      dispatch(messageCleanUp());
+
+      router.push(`/update-password?email=${email}`);
+    }
+  }, [loader]);
+
+  useEffect(() => {
     //to clean stored error message
     dispatch(errorCleanUp());
     //to clean stored message
@@ -79,7 +90,7 @@ const ResetPassword = () => {
                   id="outlined-email"
                   type="text"
                   placeholder="E-mail"
-                  name="name"
+                  name="email"
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
@@ -150,14 +161,14 @@ const ResetPassword = () => {
           </div>
         </div>
       </div>
-      <div className="flex-5 hidden lg:block bg-registerImage">
-        {/* <Image
+      <div className="flex-5 hidden lg:block">
+        <Image
           className="w-full h-screen"
           src="/images/signup-image.png"
           alt=""
           width={100}
           height={100}
-        /> */}
+        />
       </div>
     </div>
   );

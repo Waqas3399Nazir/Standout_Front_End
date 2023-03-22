@@ -14,7 +14,6 @@ import { FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 
 //
@@ -173,7 +172,6 @@ const Register = () => {
       dispatch(errorCleanUp());
       //to clean stored message
       dispatch(messageCleanUp());
-
       router.push(`/email-verification?email=${userData.email}`);
     }
   }, [loader]);
@@ -223,7 +221,7 @@ const Register = () => {
                   className="w-full rounded-xl"
                   id="outlined-email"
                   type="text"
-                  placeholder="Phone Number"
+                  placeholder="(123) 123-1234"
                   name="phoneNumber"
                   onChange={handleChange}
                 />
@@ -418,7 +416,7 @@ const Register = () => {
       </div>
       <div className="hidden md:block flex-5">
         <Image
-          className="w-full h-screen min-h-full"
+          className="w-full bg-center h-screen min-h-full"
           src="/images/signup-image.png"
           alt=""
           width={100}
