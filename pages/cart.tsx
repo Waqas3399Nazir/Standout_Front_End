@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Checkbox from "@mui/material/Checkbox";
@@ -7,24 +7,27 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "@mui/material/Button";
 import ProductCart from "@/components/ProductCart";
 import { useRouter } from "next/router";
-//import { deleteAllProductsInCart } from "@/redux-dev/cart/cart.slice";
+import {
+  deleteAllProductsInCart,
+  getUserCartProducts,
+} from "@/redux-dev/cart/cart.slice";
 import {
   cartProducts,
   totalAmount,
   totalItemsSelected,
-  // message,
-  // activityInProgress,
+  message,
+  activityInProgress,
 } from "@/redux-dev/cart/cart.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 
 const Cart = () => {
   const router = useRouter();
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const userProducts = useSelector(cartProducts);
   const totalCost = useSelector(totalAmount);
-  // const deleteMessage = useSelector(message);
-  // const loader = useSelector(activityInProgress);
+  const deleteMessage = useSelector(message);
+  const loader = useSelector(activityInProgress);
   const itemsSelected = useSelector(totalItemsSelected);
   const [selectedItems, setSelectedItems] = useState(0);
   const [selectedOrNot, setSelectedOrNot] = useState(false);
@@ -42,6 +45,14 @@ const Cart = () => {
       setSelectedOrNot(false);
     }
   };
+
+  const emptyCart = () => {
+    dispatch(deleteAllProductsInCart());
+  };
+
+  useEffect(() => {
+    dispatch(getUserCartProducts());
+  }, [deleteMessage]);
 
   return (
     <>
@@ -63,7 +74,10 @@ const Cart = () => {
               item(s))
             </h1>
           </div>
-          <div className="flex flex-row gap-[0.5rem] text-[#000000b3]">
+          <div
+            className="flex flex-row gap-[0.5rem] cursor-pointer text-[#000000b3]"
+            onClick={emptyCart}
+          >
             <RiDeleteBin5Line fontSize="1.25rem" />
             <h1 className="uppercase font-Inter font-semibold">Delete</h1>
           </div>
@@ -72,7 +86,6 @@ const Cart = () => {
       <section className="px-[4%] sm:px-[6%] lg:p-sectionXPadding bg-black sm:pt-[3rem] lg:pt-[3rem]">
         <div className="flex flex-col sm:flex-col lg:flex-row justify-between">
           <div className="w-full lg:w-[62%]">
-            {/* {deleteMessage ? <h1>Products Deleted Successfully</h1> : ""} */}
             {userProducts ? (
               <>
                 {userProducts.map((product: any) => {

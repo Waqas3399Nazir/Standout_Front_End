@@ -82,6 +82,10 @@ const ProductDetails = () => {
     dispatch(getUserCartProducts());
   }, [cartSuccessMessage]);
 
+  useEffect(() => {
+    dispatch(errorCleanUp());
+  }, []);
+
   return (
     <>
       <Header />

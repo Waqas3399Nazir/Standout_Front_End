@@ -53,27 +53,32 @@ const Header = () => {
     dispatch(getUserCartProducts());
   }, []);
 
+  const activeStyle =
+    "text-white px-[0.5rem] py-[0.25rem] bg-[#F23939] rounded";
+
   return (
     <>
       <header className="hidden sm:block h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
         <nav className="sm:w-[100%] lg:w-[52%]  float-right text-white">
           <ul className="mx-[13.66%] mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
-            <li className="">
+            <li className={router.pathname == "/product" ? activeStyle : ""}>
               <Link className="cursor-pointer" href="/product?page=1">
                 Store
               </Link>
             </li>
-            <li className="">
-              <Link className="cursor-pointer" href="/">
+            <li className={router.pathname == "/brand" ? activeStyle : ""}>
+              <Link className="cursor-pointer" href="/brand">
                 Brand
               </Link>
             </li>
-            <li className="">
+            <li
+              className={router.pathname == "/request-quote" ? activeStyle : ""}
+            >
               <Link className="cursor-pointer" href="/request-quote">
                 Request Quote
               </Link>
             </li>
-            <li className="">
+            <li className={router.pathname == "/contact" ? activeStyle : ""}>
               <Link className="cursor-pointer" href="/contact">
                 Cotact Us
               </Link>
@@ -81,7 +86,7 @@ const Header = () => {
             {/* <li className="">
             <SearchIcon className="cursor-pointer" />
           </li> */}
-            <li className="inline align-middle">
+            <li className={router.pathname == "/cart" ? activeStyle : ""}>
               <Link href="/cart">
                 <Badge
                   badgeContent={productsInCart}
@@ -170,7 +175,14 @@ const Header = () => {
                       ""
                     )}
                   </li>
-                  <li className="inline pt-[0.75rem] pl-[10%] align-middle">
+                  <li
+                    className={
+                      router.pathname == "/cart"
+                        ? `inline pt-[0.75rem] pl-[10%] align-middle ${activeStyle}`
+                        : "inline pt-[0.75rem] pl-[10%] align-middle"
+                    }
+                    //className="inline pt-[0.75rem] pl-[10%] align-middle"
+                  >
                     <Link className="flex flex-row gap-[5%]" href="/cart">
                       <Badge
                         badgeContent={productsInCart}
@@ -182,22 +194,46 @@ const Header = () => {
                       <h1>Cart</h1>
                     </Link>
                   </li>
-                  <li className="pl-[10%]">
+                  <li
+                    className={
+                      router.pathname == "/product"
+                        ? `pl-[10%] ${activeStyle}`
+                        : "pl-[10%]"
+                    }
+                  >
                     <Link className="cursor-pointer" href="/product?page=1">
                       Store
                     </Link>
                   </li>
-                  <li className="pl-[10%]">
+                  <li
+                    className={
+                      router.pathname == "/brand"
+                        ? `pl-[10%] ${activeStyle}`
+                        : "pl-[10%]"
+                    }
+                  >
                     <Link className="cursor-pointer" href="/">
                       Brand
                     </Link>
                   </li>
-                  <li className="pl-[10%]">
+                  <li
+                    className={
+                      router.pathname == "/request-quote"
+                        ? `pl-[10%] ${activeStyle}`
+                        : "pl-[10%]"
+                    }
+                  >
                     <Link className="cursor-pointer" href="/request-quote">
                       Request Quote
                     </Link>
                   </li>
-                  <li className="pl-[10%]">
+                  <li
+                    className={
+                      router.pathname == "/contact"
+                        ? `pl-[10%] ${activeStyle}`
+                        : "pl-[10%]"
+                    }
+                  >
                     <Link className="cursor-pointer" href="/contact">
                       Cotact Us
                     </Link>
@@ -230,6 +266,18 @@ const Header = () => {
                         onClick={naviagteToLoginPage}
                       >
                         Login
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </li>
+                  <li className="inline pl-[10%] align-middle">
+                    {!showHideBtns ? (
+                      <button
+                        className="px-[1rem] py-[0.5rem] w-[70%] sm:w-auto bg-[#F23939] cursor-pointer rounded-md"
+                        onClick={naviagteToSignUpPage}
+                      >
+                        Logout
                       </button>
                     ) : (
                       ""

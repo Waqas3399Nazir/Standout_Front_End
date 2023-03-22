@@ -178,6 +178,13 @@ const Register = () => {
     }
   }, [loader]);
 
+  useEffect(() => {
+    //to clean stored error message
+    dispatch(errorCleanUp());
+    //to clean stored message
+    dispatch(messageCleanUp());
+  }, []);
+
   return (
     <div className="flex flex-row h-fit">
       <div className="flex-5 flex py-[2rem] sm:py-[3rem]">

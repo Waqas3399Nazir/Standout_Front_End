@@ -78,7 +78,7 @@ export const deleteUserProductInCart = createAsyncThunk(
 
 //delete all products
 export const deleteAllProductsInCart = createAsyncThunk(
-  "deleteCart/Product",
+  "deleteAllCart/Product",
   async (product, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance().delete(
@@ -181,24 +181,6 @@ const cartSlice = createSlice({
       }
     );
 
-    //delete cart products
-    // builder.addCase(deleteAllProductsInCart.pending, (state, action: any) => {
-    //   state.isActivityInProgress = true;
-    // });
-
-    // builder.addCase(deleteAllProductsInCart.rejected, (state, action: any) => {
-    //   state.isActivityInProgress = false;
-    //   state.error = {
-    //     code: action.payload.status,
-    //     message: action.payload.data.message,
-    //   };
-    // });
-
-    // builder.addCase(deleteAllProductsInCart.fulfilled, (state, action: any) => {
-    //   state.isActivityInProgress = false;
-    //   state.message = action.payload.message;
-    // });
-
     //delete product in cart
     builder.addCase(deleteUserProductInCart.pending, (state, action: any) => {
       state.isActivityInProgress = true;
@@ -215,6 +197,24 @@ const cartSlice = createSlice({
     builder.addCase(deleteUserProductInCart.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
       state.deleteSuccessMessage = action.payload.message;
+    });
+
+    //delete cart products
+    builder.addCase(deleteAllProductsInCart.pending, (state, action: any) => {
+      state.isActivityInProgress = true;
+    });
+
+    builder.addCase(deleteAllProductsInCart.rejected, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.error = {
+        code: action.payload.status,
+        message: action.payload.data.message,
+      };
+    });
+
+    builder.addCase(deleteAllProductsInCart.fulfilled, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.message = action.payload.message;
     });
   },
 });
