@@ -32,7 +32,7 @@ const ProductCard = ({ product }: Props) => {
           <p className="text-white">${product.price}</p>
         </div>
         <div className="bg-white py-[2.5rem] px-[7%] rounded-b-[0.5rem]">
-          <h1 className="font-bold text-[#F23939] sm:text-[1rem] lg:text-formHeading font-Inter">
+          <h1 className="font-bold truncate text-[#F23939] sm:text-[1rem] lg:text-formHeading font-Inter">
             {product.name}
           </h1>
           <h3 className="text-[#464646] sm:text-[0.90rem] lg:text-homeSubHeading font-Inter">

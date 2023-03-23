@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="text-white py-[4rem] flex flex-col sm:text-white w-full sm:py-[5rem] lg:py-[7.5rem] bg-black px-[10%] sm:px-[10%] lg:px-[13.60%] sm:flex-row">
         <div className="w-[100%] sm:w-[50%] lg:w-[33.33%]">
           <div className="lg:w-fit m-auto">
-            <ul className="sm:flex flex-col text-footerGrayItem sm:text-[1.25rem lg:text-footerItem font-bold sm:font-bold content-between gap-y-2">
+            <ul className="sm:flex flex-col text-footerGrayItem sm:text-[1.25rem] lg:text-footerItem font-bold sm:font-bold content-between gap-y-2">
               <li className="text-[#F23939] ">
                 <Link href="/"> Our Site</Link>
               </li>

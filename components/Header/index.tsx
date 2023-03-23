@@ -60,26 +60,35 @@ const Header = () => {
     <>
       <header className="hidden sm:block h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
         <nav className="sm:w-[100%] lg:w-[52%]  float-right text-white">
-          <ul className="mx-[13.66%] mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
+          <ul className=" mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
             <li className={router.pathname == "/product" ? activeStyle : ""}>
-              <Link className="cursor-pointer" href="/product?page=1">
+              <Link
+                className="cursor-pointer mx-[0.5rem]"
+                href="/product?page=1"
+              >
                 Store
               </Link>
             </li>
             <li className={router.pathname == "/brand" ? activeStyle : ""}>
-              <Link className="cursor-pointer" href="/brand">
+              <Link className="cursor-pointer mx-[0.5rem]" href="/brand">
                 Brand
               </Link>
             </li>
             <li
               className={router.pathname == "/request-quote" ? activeStyle : ""}
             >
-              <Link className="cursor-pointer" href="/request-quote">
+              <Link
+                className="cursor-pointer min-w-max flex flex-row mx-[0.5rem]"
+                href="/request-quote"
+              >
                 Request Quote
               </Link>
             </li>
             <li className={router.pathname == "/contact" ? activeStyle : ""}>
-              <Link className="cursor-pointer" href="/contact">
+              <Link
+                className="cursor-pointer min-w-max flex flex-row mr-[0.5rem]"
+                href="/contact"
+              >
                 Cotact Us
               </Link>
             </li>
@@ -87,7 +96,7 @@ const Header = () => {
             <SearchIcon className="cursor-pointer" />
           </li> */}
             <li className={router.pathname == "/cart" ? activeStyle : ""}>
-              <Link href="/cart">
+              <Link className="cursor-pointer mx-[0.75rem]" href="/cart">
                 <Badge
                   badgeContent={productsInCart}
                   color="error"
@@ -123,7 +132,7 @@ const Header = () => {
             <li className="inline align-middle">
               {showHideBtns ? (
                 <button
-                  className="px-[1rem] py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
+                  className="px-[1rem] ml-[0.5rem] mr-[0.5rem] min-w-max py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
                   onClick={naviagteToSignUpPage}
                 >
                   Sign Up
