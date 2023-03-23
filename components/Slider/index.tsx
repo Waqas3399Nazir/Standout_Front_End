@@ -2,10 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
-// function valuetext(value: number) {
-//   return;
-// }
-
 type Props = {
   defaultPriceRange?: any;
   selectPriceRange?: any;
@@ -20,9 +16,9 @@ export default function PriceRangeSlider({
   };
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 300 }} className="text-[#F23939]">
       <Slider
-        className="text-[#F23939] yy-[0rem] sm:py-[0rem] w-full sm:w-[80%] lg:w-[95%]"
+        className="text-[#F23939] bg-[#F23939] sm:py-[0rem] w-full sm:w-[80%] lg:w-[95%]"
         value={defaultPriceRange}
         onChange={handleChange}
         valueLabelDisplay="auto"

@@ -8,9 +8,14 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 type Props = {
   dropdownValues?: any;
   selValue?: any;
+  placeholder?: string;
 };
 
-export default function Dropdown({ dropdownValues, selValue }: Props) {
+export default function Dropdown({
+  dropdownValues,
+  selValue,
+  placeholder,
+}: Props) {
   const [selectedValue, setSelectedValue] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -25,39 +30,23 @@ export default function Dropdown({ dropdownValues, selValue }: Props) {
           className="w-full bg-white"
           value={selectedValue}
           onChange={handleChange}
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return <em>{placeholder}</em>;
+            }
+            return selected;
+          }}
           displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
         >
           {dropdownValues !== undefined
             ? dropdownValues.map((value: any) => {
                 return (
-                  <MenuItem
-                    key={value}
-                    value={
-                      value === "year" ||
-                      value === "model" ||
-                      value === "make" ||
-                      value === "trim" ||
-                      value === "Choose Brand" ||
-                      value === "Newest" ||
-                      value === "Select"
-                        ? ""
-                        : value
-                    }
-                  >
-                    {/* {value === "year" ? <em> */}
+                  <MenuItem key={value} value={value}>
                     {value}
-                    {/* </em> : value} */}
                   </MenuItem>
                 );
               })
             : ""}
-          {/* <MenuItem value="">
-            <em>None</em>
-          </MenuItem> */}
-          {/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
         </Select>
       </FormControl>
     </div>

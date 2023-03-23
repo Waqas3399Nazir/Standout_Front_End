@@ -142,7 +142,7 @@ const Product = () => {
     dispatch(getAllBrands());
   }, []);
 
-  const sortBy = ["Select", "Newest", "Oldest", "Out Dated"];
+  const sortBy = ["Newest", "Oldest", "Out Dated"];
   return (
     <>
       <Header />
@@ -167,7 +167,7 @@ const Product = () => {
               Search your item
             </p>
             <div className="flex flex-col gap-[1rem]">
-              <div className="w-full bg-white flex items-center rounded h-[3.5rem]">
+              <div className="w-full bg-white flex items-center rounded py-[0.75rem]">
                 <InputBase
                   className="w-[80%]"
                   sx={{ ml: 1, flex: 1 }}
@@ -175,8 +175,12 @@ const Product = () => {
                   onChange={(event) => setProductName(event.target.value)}
                 />
               </div>
-              <div className="w-full sm:mt-[0rem]  h-[2.75rem]">
-                <Dropdown dropdownValues={chooseBrand} selValue={setBrand} />
+              <div className="w-full m-[0rem]">
+                <Dropdown
+                  dropdownValues={chooseBrand}
+                  selValue={setBrand}
+                  placeholder={"Brands"}
+                />
               </div>
             </div>
             <div className="mt-[2rem] sm:mb-[2rem] lg:mb-[0rem] sm:mt-[2rem] lg:mt-[0rem] flex flex-row gap-[5%] lg:flex-col">
@@ -189,23 +193,21 @@ const Product = () => {
                   selectPriceRange={setPriceRange}
                 />
               </div>
-              <Button
-                className="hidden w-[50%]  sm:flex flex-row bg-[#F23939] text-white lg:w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
-                variant="contained"
-                endIcon={<EastIcon />}
+              <button
+                className="hidden w-[50%] text-[1.50rem] sm:flex flex-row bg-[#F23939] text-white lg:w-full justify-between items-center font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem] hover:bg-[#F23939]"
                 onClick={filterProducts}
               >
                 Find Item
-              </Button>
+                <EastIcon />
+              </button>
             </div>
-            <Button
-              className="flex flex-row sm:hidden lg:hidden bg-[#F23939] mb-[1rem] text-white w-full justify-between font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem]"
-              variant="contained"
-              endIcon={<EastIcon />}
+            <button
+              className="flex flex-row text-[1.30rem] sm:hidden bg-[#F23939] mb-[1rem] text-white w-full justify-between items-center font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem] hover:bg-[#F23939]"
               onClick={filterProducts}
             >
               Find Item
-            </Button>
+              <EastIcon />
+            </button>
           </div>
           <div className="w-full sm:w-full lg:w-[65%]">
             <div className="flex flex-row justify-between">
@@ -218,7 +220,11 @@ const Product = () => {
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Sort by
                 </p>
-                <Dropdown dropdownValues={sortBy} selValue={setSortByValue} />
+                <Dropdown
+                  dropdownValues={sortBy}
+                  selValue={setSortByValue}
+                  placeholder={"Select"}
+                />
               </div>
             </div>
             <div>

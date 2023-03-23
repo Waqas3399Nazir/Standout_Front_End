@@ -34,6 +34,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
 import Alert from "@mui/material/Alert";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 const ProductDetails = () => {
   const router = useRouter();
@@ -55,6 +57,36 @@ const ProductDetails = () => {
   const decrementProductQty = () => {
     if (productQty > 0) {
       setProductQty(productQty - 1);
+    }
+  };
+
+  const [sliderItem, setSliderItem] = useState(0);
+  const sliderItems = [
+    {
+      url: !loader && productDetails ? productDetails.photoUrl : "",
+    },
+    {
+      url: !loader && productDetails ? productDetails.photoUrl : "",
+    },
+    {
+      url: !loader && productDetails ? productDetails.photoUrl : "",
+    },
+    {
+      url: !loader && productDetails ? productDetails.photoUrl : "",
+    },
+    {
+      url: !loader && productDetails ? productDetails.photoUrl : "",
+    },
+  ];
+  const sliderActiveItemStyle = "border-4 border-[#F23939]";
+  const incrementSlider = () => {
+    if (sliderItem < 4) {
+      setSliderItem(sliderItem + 1);
+    }
+  };
+  const decrementSlider = () => {
+    if (sliderItem > 0) {
+      setSliderItem(sliderItem - 1);
     }
   };
 
@@ -104,11 +136,15 @@ const ProductDetails = () => {
       <section className="px-[7%] sm:px-[5%] lg:p-productPagePadding lg:pt-[0rem] bg-black">
         <div className="flex flex-col sm:flex-row w-full items-center sm:items-start sm:gap-[6%] lg:gap-[8%]">
           <div className="w-[70%] sm:w-[45%] lg:w-[54%] mt-[1rem] sm:mt-[0rem]">
-            <div className="bg-[#C4C4C4] rounded-2xl w-full">
+            <div className="bg-[#C4C4C4] relative rounded-2xl w-full">
+              <NavigateBeforeIcon
+                className="absolute text-[#F23939] cursor-pointer text-[3rem] sm:text-[4rem] lg:text-[6rem] top-[40%] left-[-25%] sm:left-[-5%]  lg:left-[-4%] "
+                onClick={decrementSlider}
+              />
               {!loader && productDetails ? (
                 <Image
-                  className="m-auto"
-                  src={productDetails?.photoUrl}
+                  className="m-auto px-[1rem] py-[1.5rem]"
+                  src={sliderItems[sliderItem].url}
                   alt=""
                   width={510}
                   height={250}
@@ -116,43 +152,63 @@ const ProductDetails = () => {
               ) : (
                 <CircularProgress />
               )}
+              <NavigateNextIcon
+                className="absolute text-[#F23939] cursor-pointer text-[3rem] sm:text-[4rem] lg:text-[6rem] top-[40%] right-[-25%] sm:right-[-5%]  lg:right-[-4%] "
+                onClick={incrementSlider}
+              />
             </div>
-            <div className="hidden sm:flex flex-row mt-[2.5rem] gap-[1.5rem]">
-              <Image
-                className="rounded-xl bg-[#C4C4C4]"
-                src={!loader && productDetails ? productDetails.photoUrl : ""}
-                alt=""
-                width={102}
-                height={110}
-              />
-              <Image
-                className="rounded-xl bg-[#C4C4C4]"
-                src={!loader && productDetails ? productDetails.photoUrl : ""}
-                alt=""
-                width={102}
-                height={110}
-              />
-              <Image
-                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
-                src={!loader && productDetails ? productDetails.photoUrl : ""}
-                alt=""
-                width={102}
-                height={110}
-              />
-              <Image
-                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
-                src={!loader && productDetails ? productDetails.photoUrl : ""}
-                alt=""
-                width={102}
-                height={110}
-              />
-              <Image
-                className="rounded-xl sm:hidden lg:block bg-[#C4C4C4]"
-                src={!loader && productDetails ? productDetails.photoUrl : ""}
-                alt=""
-                width={102}
-                height={110}
-              />
+            <div className="hidden sm:flex sm:flex-col lg:flex-row mt-[2.5rem] gap-[1.5rem]">
+              <div className="flex flex-row gap-[1.5rem]">
+                <Image
+                  className={`rounded-xl p-[0.25rem] bg-[#C4C4C4] ${
+                    sliderItem === 0 ? sliderActiveItemStyle : ""
+                  } `}
+                  src={sliderItems[0].url}
+                  alt=""
+                  width={102}
+                  height={110}
+                />
+                <Image
+                  className={`rounded-xl p-[0.25rem] bg-[#C4C4C4] ${
+                    sliderItem === 1 ? sliderActiveItemStyle : ""
+                  } `}
+                  src={sliderItems[1].url}
+                  alt=""
+                  width={102}
+                  height={110}
+                />
+              </div>
+              <div className="flex flex-row gap-[1.5rem]">
+                <Image
+                  className={`rounded-xl p-[0.25rem] bg-[#C4C4C4] ${
+                    sliderItem === 2 ? sliderActiveItemStyle : ""
+                  } `}
+                  src={sliderItems[2].url}
+                  alt=""
+                  width={102}
+                  height={110}
+                />
+                <Image
+                  className={`rounded-xl p-[0.25rem] bg-[#C4C4C4] ${
+                    sliderItem === 3 ? sliderActiveItemStyle : ""
+                  } `}
+                  src={sliderItems[3].url}
+                  alt=""
+                  width={102}
+                  height={110}
+                />
+              </div>
+              <div className="flex flex-row">
+                <Image
+                  className={`rounded-xl p-[0.25rem] bg-[#C4C4C4] ${
+                    sliderItem === 4 ? sliderActiveItemStyle : ""
+                  } `}
+                  src={sliderItems[4].url}
+                  alt=""
+                  width={102}
+                  height={110}
+                />
+              </div>
             </div>
           </div>
           <div className="font-Inter sm:text-left w-full mt-[1rem] sm:w-[54%] sm:mt-[0rem] lg:w-[45%]">
