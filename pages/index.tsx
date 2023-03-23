@@ -51,7 +51,7 @@ export default function Home() {
         <section className="mt-[-6rem] sm:mt-[-4.375rem] absolute z-10 w-full">
           <Search />
         </section>
-        <section className="px-[10%] sm:px-[0] w-full sm:pl-[4rem] lg:pl-[10rem] bg-secondSectionImage bg-cover">
+        <section className="px-[8%] sm:px-[0] w-full sm:pl-[4rem] lg:pl-[10rem] bg-secondSectionImage bg-cover">
           <div className="pt-[18rem] sm:[18rem] lg:pt-[15.25rem] pb-[4rem] sm:pb-[6.56rem]">
             <p className="text-5xl sm:text-6xl lg:text-secondContainerHeading uppercase font-normal">
               Check out{" "}
@@ -65,7 +65,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-[6.19rem] text-7xl sm:text-mainHeading font-normal font-heading uppercase tracking-headingSpace not-italic">
+            <div className="mt-[6.19rem] text-7xl text-[4rem] sm:text-mainHeading font-normal font-heading uppercase tracking-headingSpace not-italic">
               <h1 className=" text-black ">Lift</h1>
               <h1 className=" text-[#F23939] ">Leveling</h1>
               <h1 className=" text-black">Kits</h1>

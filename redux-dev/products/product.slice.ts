@@ -45,13 +45,16 @@ const initialState: IproductSate = {
 export const getAllProducts = createAsyncThunk(
   "getAll/products",
   async (productsDetails: any, { rejectWithValue }) => {
-    const { page, name, minPrice, maxPrice, brandId } = productsDetails;
+    const { page, name, minPrice, maxPrice, brandId, yearIntroduced, model } =
+      productsDetails;
     let url;
     url = `/product/get-products?${page ? `page=${page}&` : ""}${
       minPrice ? `minPrice=${Number(minPrice)}&` : ""
     }${maxPrice ? `maxPrice=${Number(maxPrice)}&` : ""}${
       name ? `name=${name}&` : ""
-    }${brandId ? `brandId=${brandId}&` : ""}`;
+    }${brandId ? `brandId=${brandId}&` : ""}${
+      yearIntroduced ? `year=${yearIntroduced}&` : ""
+    }${model ? `model=${model}&` : ""}`;
     try {
       const { data } = await axiosInstance().get(url);
       return data;

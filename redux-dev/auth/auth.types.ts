@@ -5,5 +5,5 @@ export interface IuserState {
   user?: any;
   isActivityInProgress: boolean;
   message?: string;
-  isValid?: boolean;
+  isTokenValid?: boolean;
 }

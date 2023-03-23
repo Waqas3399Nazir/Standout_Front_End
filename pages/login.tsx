@@ -18,12 +18,14 @@ import {
   loginUser,
   errorCleanUp,
   messageCleanUp,
+  verifyToken,
 } from "@/redux-dev/auth/auth.slice";
 import {
   activityInProgress,
   error,
   message,
   user,
+  isTokenValid,
 } from "@/redux-dev/auth/auth.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
@@ -68,6 +70,7 @@ const Login = () => {
   const userMessage = useSelector(message);
   const loader = useSelector(activityInProgress);
   const userData = useSelector(user);
+  const isValid = useSelector(isTokenValid);
 
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -94,7 +97,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    alert(process.env.NODE_ENV);
+    // alert(process.env.NODE_ENV);
     if (userMessage && !loader) {
       //to clean stored error message
       dispatch(errorCleanUp());
@@ -102,8 +105,16 @@ const Login = () => {
       dispatch(messageCleanUp());
 
       router.push("/");
+      // console.log("I am called but why?!");
+      // dispatch(verifyToken());
     }
-  }, [loader]);
+  }, [userMessage]);
+
+  // useEffect(() => {
+  //   if (isValid) {
+  //     router.push("/");
+  //   }
+  // }, [isValid]);
 
   return (
     // <AuthGuard>

@@ -16,14 +16,14 @@ export default function PriceRangeSlider({
   };
 
   return (
-    <Box sx={{ width: 300 }} className="text-[#F23939]">
+    <Box sx={{ width: 100 }} className="text-[#F23939] w-full">
       <Slider
-        className="text-[#F23939] bg-[#F23939] sm:py-[0rem] w-full sm:w-[80%] lg:w-[95%]"
+        className="text-[#F23939] bg-[#F23939] py-[1px] sm:py-[0rem] w-full sm:w-[80%] lg:w-[95%]"
         value={defaultPriceRange}
         onChange={handleChange}
         valueLabelDisplay="auto"
         min={0}
-        max={20000}
+        max={10000}
       />
     </Box>
   );

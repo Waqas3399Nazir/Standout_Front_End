@@ -49,7 +49,7 @@ const ProductCard = ({ product }: Props) => {
             </div>
             <div className="flex flex-col">
               <h3 className="font-normal text-sm text-black">Color</h3>
-              <h1 className="font-semibold text-black sm:text-[0.90rem] lg:text-homeSubHeading">
+              <h1 className="font-semibold truncate text-black sm:text-[0.90rem] lg:text-homeSubHeading">
                 {product.color ? product.color : ""}
               </h1>
             </div>

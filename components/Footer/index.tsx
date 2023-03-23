@@ -57,13 +57,13 @@ const Footer = () => {
             </li>
             <li>
               <input
-                className="w-[90%] pl-[24px] py-[1rem]  mb-[2.25rem] border-[#F23939]"
+                className="w-[75%] lg:w-[90%] text-black pl-[24px] py-[1rem]  mb-[2.25rem] border-[#F23939]"
                 type="text"
                 placeholder="Email"
               />
             </li>
             <li>
-              <button className="bg-[#F23939] py-[1rem] pl-6 pr-[45%]">
+              <button className="bg-[#F23939] cursor-pointer w-[75%] text-center py-[1rem]">
                 Subscribe
               </button>
             </li>
@@ -79,13 +79,14 @@ const Footer = () => {
           <div className="flex flex-row gap-[2rem]">
             <li className="w-full">
               <input
+                style={{ color: "#C7C7CD" }}
                 className="w-full pl-[24px] py-[1rem]  mb-[2.25rem] border-[#F23939]"
                 type="text"
                 placeholder="Email"
               />
             </li>
             <li className="w-full">
-              <button className="bg-[#F23939] w-full py-[1rem]">
+              <button className="bg-[#F23939] cursor-pointer w-full py-[1rem]">
                 Subscribe
               </button>
             </li>

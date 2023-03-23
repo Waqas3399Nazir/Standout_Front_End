@@ -8,14 +8,13 @@ import Router, { useRouter } from "next/router";
 import { SS_TOKEN } from "@/utils/constants";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-//testing start
+import CloseIcon from "@mui/icons-material/Close";
 import { getUserCartProducts } from "@/redux-dev/cart/cart.slice";
 import { cartQty } from "@/redux-dev/cart/cart.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import MenuIcon from "@mui/icons-material/Menu";
 import OutsideClickHandler from "react-outside-click-handler";
-//testing end
 
 const Header = () => {
   const router = useRouter();
@@ -24,12 +23,10 @@ const Header = () => {
   const [showHideBtns, setShowHideBtns] = useState(true);
   const productsInCart = useSelector(cartQty);
 
-  //
   const [showHideMobileNavbar, setShowHideMobileNavbar] = useState(false);
   const mobileNavbarHandler = () => {
     setShowHideMobileNavbar(!showHideMobileNavbar);
   };
-  //
 
   const showHideHandler = () => {
     setShowHideDropdwon(!showHideDropdown);
@@ -59,8 +56,8 @@ const Header = () => {
   return (
     <>
       <header className="hidden sm:block h-[7.375rem] px-[8.38%] text-right align-middle bg-black">
-        <nav className="sm:w-[100%] lg:w-[52%]  float-right text-white">
-          <ul className=" mr-[0px] flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
+        <nav className="sm:w-[90%] lg:w-[52%]  float-right text-white">
+          <ul className="flex flex-row justify-between items-center h-[7.735rem] align-middle text-sm font-normal">
             <li className={router.pathname == "/product" ? activeStyle : ""}>
               <Link
                 className="cursor-pointer mx-[0.5rem]"
@@ -109,7 +106,7 @@ const Header = () => {
             <li className="inline align-middle" onClick={showHideHandler}>
               {!showHideBtns ? (
                 <Avatar
-                  className="cursor-pointer w-[2rem] h-[2rem]"
+                  className="cursor-pointer mx-[0.75rem] w-[2rem] h-[2rem]"
                   alt="Travis Howard"
                   src="/images/header-icon.svg"
                 />
@@ -132,7 +129,7 @@ const Header = () => {
             <li className="inline align-middle">
               {showHideBtns ? (
                 <button
-                  className="px-[1rem] ml-[0.5rem] mr-[0.5rem] min-w-max py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
+                  className="px-[1rem] ml-[0.5rem]  min-w-max py-[0.5rem] bg-[#F23939] cursor-pointer rounded-md"
                   onClick={naviagteToSignUpPage}
                 >
                   Sign Up
@@ -159,20 +156,26 @@ const Header = () => {
       <>
         <header className="block w-full bg-black sm:hidden">
           <MenuIcon
-            className="text-white my-[1.5rem] ml-[1.5rem]"
+            className="text-white cursor-pointer my-[1.5rem] ml-[1.5rem]"
             onClick={mobileNavbarHandler}
           />
           {showHideMobileNavbar ? (
             <OutsideClickHandler
               onOutsideClick={() => setShowHideMobileNavbar(false)}
             >
-              <nav className="w-[60%] top-0 absolute z-50 pt-[3rem] text-white bg-black min-h-fit h-screen">
+              <nav className="w-[60%] top-0 absolute z-50 pt-[1.25rem] text-white bg-black min-h-fit h-screen">
                 <ul className="mr-[0px] flex flex-col uppercase gap-[1rem] font-heading text-lg font-normal">
+                  <li
+                    className=" ml-[1.5rem] cursor-pointer"
+                    onClick={mobileNavbarHandler}
+                  >
+                    <CloseIcon />
+                  </li>
                   <li className="inline pl-[10%] pr-[10%] align-middle">
                     {!showHideBtns ? (
                       <>
                         <Avatar
-                          className="cursor-pointer m-auto w-[6.5rem] h-[6.5rem]"
+                          className="cursor-pointer mt-[1.75rem] m-auto w-[6.5rem] h-[6.5rem]"
                           alt="Travis Howard"
                           src="/images/header-icon.svg"
                         />
@@ -251,12 +254,12 @@ const Header = () => {
             <SearchIcon className="cursor-pointer" />
           </li> */}
                   <hr className="border-[1px] border-[#F23939]" />
-                  <li className="pl-[10%]">
+                  {/* <li className="pl-[10%]">
                     <Link className="cursor-pointer" href="/">
                       Profile Setting
                     </Link>
-                  </li>
-                  <li className="inline pl-[10%] align-middle">
+                  </li> */}
+                  <li className="inline mt-[1rem] pl-[10%] align-middle">
                     {showHideBtns ? (
                       <button
                         className="px-[1rem] py-[0.5rem] w-[70%] sm:w-auto bg-[#F23939] cursor-pointer rounded-md"

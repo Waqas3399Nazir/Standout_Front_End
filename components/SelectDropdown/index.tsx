@@ -32,7 +32,11 @@ export default function Dropdown({
           onChange={handleChange}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>{placeholder}</em>;
+              return (
+                <p style={{ color: "#C7C7CD", fontSize: "14px" }}>
+                  {placeholder}
+                </p>
+              );
             }
             return selected;
           }}

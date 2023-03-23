@@ -43,7 +43,7 @@ const Product = () => {
   const [productName, setProductName] = useState("");
   const [brand, setBrand] = useState("");
   //const [brandId, setBrandId] = useState();
-  const [priceRange, setPriceRange] = useState<number[]>([7000, 14000]);
+  const [priceRange, setPriceRange] = useState<number[]>([2000, 8000]);
   const [sortByValue, setSortByValue] = useState("");
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -118,7 +118,9 @@ const Product = () => {
       router.query.minPrice ||
       router.query.maxPrice ||
       router.query.name ||
-      router.query.brandId
+      router.query.brandId ||
+      router.query.year ||
+      router.query.model
     )
       dispatch(
         getAllProducts({
@@ -127,6 +129,8 @@ const Product = () => {
           maxPrice: router.query.maxPrice,
           name: router.query.name,
           brandId: router.query.brandId,
+          yearIntroduced: router.query.year,
+          model: router.query.model,
         })
       );
   }, [
@@ -135,6 +139,8 @@ const Product = () => {
     router.query.maxPrice,
     router.query.name,
     router.query.brandId,
+    router.query.year,
+    router.query.model,
   ]);
 
   useEffect(() => {
@@ -184,7 +190,7 @@ const Product = () => {
               </div>
             </div>
             <div className="mt-[2rem] sm:mb-[2rem] lg:mb-[0rem] sm:mt-[2rem] lg:mt-[0rem] flex flex-row gap-[5%] lg:flex-col">
-              <div className="mt-[0rem] w-[50%] lg:w-full mb-[0rem] lg:mt-[2rem] lg:mb-[1.5rem]">
+              <div className="mt-[0rem] w-full sm:w-[50%] lg:w-full mb-[0rem] lg:mt-[2rem] lg:mb-[1.5rem]">
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0rem] lg:mt-[0.625rem]">
                   Price range
                 </p>
@@ -202,7 +208,7 @@ const Product = () => {
               </button>
             </div>
             <button
-              className="flex flex-row text-[1.30rem] sm:hidden bg-[#F23939] mb-[1rem] text-white w-full justify-between items-center font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem] hover:bg-[#F23939]"
+              className="flex flex-row text-[1.30rem] mt-[0.75rem] sm:hidden bg-[#F23939] mb-[1rem] text-white w-full justify-between items-center font-bold font-heading text-homeButtonText py-[1rem] px-[9.25%] rounded-[0.5rem] hover:bg-[#F23939]"
               onClick={filterProducts}
             >
               Find Item
@@ -216,7 +222,7 @@ const Product = () => {
                   Showing <strong>20 Products from {numberOfProducts}</strong>
                 </p>
               </div>
-              <div className="hidden sm:flex sm:flex-row sm:gap-x-4">
+              {/* <div className="hidden sm:flex sm:flex-row sm:gap-x-4">
                 <p className="text-[#ffffff80] font-semibold text-homeSubHeading font-Inter mt-[0.625rem] mb-[3rem]">
                   Sort by
                 </p>
@@ -225,7 +231,7 @@ const Product = () => {
                   selValue={setSortByValue}
                   placeholder={"Select"}
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               {loader ? (

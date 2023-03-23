@@ -10,7 +10,7 @@ const initialState: IuserState = {
   isActivityInProgress: false,
   message: "",
   user: {},
-  isValid: false,
+  isTokenValid: false,
 };
 
 //register user
@@ -51,7 +51,7 @@ export const verifyToken = createAsyncThunk(
   "loggedIn/user",
   async (value, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/getAuthState");
+      const { data } = await axiosInstance().get("/auth/getAuthState");
       return data;
     } catch (error: any) {
       console.log(error);
@@ -72,7 +72,7 @@ export const forgotPassword = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error: any) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -86,7 +86,7 @@ export const updatePassword = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error: any) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -104,6 +104,7 @@ const authSlice = createSlice({
     },
     messageCleanUp: (state) => {
       state.message = "";
+      state.isTokenValid = false;
     },
   },
   extraReducers: (builder) => {
@@ -132,12 +133,10 @@ const authSlice = createSlice({
 
     builder.addCase(loginUser.rejected, (state, action: any) => {
       state.isActivityInProgress = false;
-      console.log(state.error);
       state.error = {
         code: action.payload.status,
         message: action.payload.data.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(loginUser.fulfilled, (state, action: any) => {
@@ -152,18 +151,17 @@ const authSlice = createSlice({
 
     builder.addCase(verifyToken.rejected, (state, action: any) => {
       state.isActivityInProgress = false;
+      state.isTokenValid = action.payload.data.isValid;
       state.error = {
         code: action.payload.status,
-        message: action.payload.message,
+        message: action.payload.data.message,
       };
     });
 
     builder.addCase(verifyToken.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
-      // state.user = action.payload.user;
-      state.isValid = action.payload.isValid;
+      state.isTokenValid = action.payload.isValid;
       state.message = action.payload.message;
-      console.log(action.payload);
     });
 
     //forgot password API
@@ -175,16 +173,13 @@ const authSlice = createSlice({
       state.isActivityInProgress = false;
       state.error = {
         code: action.payload.status,
-        message: action.payload.message,
+        message: action.payload.data.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(forgotPassword.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
       state.message = action.payload.message;
-      console.log(action.payload);
-      console.log(action.payload.message);
     });
 
     //updatePassword
@@ -197,16 +192,13 @@ const authSlice = createSlice({
       state.isActivityInProgress = false;
       state.error = {
         code: action.payload.status,
-        message: action.payload.message,
+        message: action.payload.data.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(updatePassword.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
       state.message = action.payload.message;
-      console.log(action.payload);
-      console.log(action.payload.message);
     });
   },
 });

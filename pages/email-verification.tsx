@@ -11,6 +11,10 @@ const EmailVerification = () => {
     router.push("/register");
   };
 
+  const navigateToLoignPage = () => {
+    router.push("/login");
+  };
+
   return (
     <div className="flex flex-row h-screen">
       <div className="flex-5 flex">
@@ -37,6 +41,14 @@ const EmailVerification = () => {
             >
               Try another email address.
             </strong>
+          </p>
+        </div>
+        <div className="w-full text-center mt-4">
+          <p
+            className="my-8 font-medium text-[#0048B9] cursor-pointer"
+            onClick={navigateToLoignPage}
+          >
+            Return to Login
           </p>
         </div>
       </div>
