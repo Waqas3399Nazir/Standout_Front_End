@@ -191,7 +191,7 @@ const Register = () => {
             <h1 className="text-heading not-italic text-black font-bold">
               Register
             </h1>
-            <div className="w-full my-8">
+            <div className="w-full flex flex-col !gap-[0.5rem] my-8">
               <TextField
                 className="w-full rounded-xl"
                 id="outlined-email"
@@ -201,14 +201,14 @@ const Register = () => {
                 onChange={handleChange}
               />
               <TextField
-                className="w-full rounded-xl mt-[0.5rem]"
+                className="w-full rounded-xl"
                 id="outlined-email"
                 type="text"
                 placeholder="Last Name"
                 name="lastName"
                 onChange={handleChange}
               />
-              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
+              <div className="flex flex-row gap-[5%]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -226,7 +226,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
+              <div className="flex flex-row gap-[5%]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -244,7 +244,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-row gap-[5%] mt-[0.5rem]">
+              <div className="flex flex-row gap-[5%]">
                 <TextField
                   className="w-full rounded-xl"
                   id="outlined-email"
@@ -263,90 +263,63 @@ const Register = () => {
                 />
               </div>
               <TextField
-                className="w-full rounded-xl mt-[0.5rem]"
+                className="w-full rounded-xl"
                 id="outlined-email"
                 type="email"
                 placeholder="E-mail"
                 name="email"
                 onChange={handleChange}
               />
-
-              <div className="">
-                <FormControl
-                  className="m-0 rounded-xl mt-2.5"
-                  sx={{ m: 1, width: "100%" }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    onChange={handleChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </div>
-              <div className="">
-                <FormControl
-                  className="m-0 rounded-xl mt-2.5"
-                  sx={{ m: 1, width: "100%" }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    onChange={handleChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </div>
-              {/* <div className="mt-2.5">
-                <FormControl fullWidth>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={country}
-                    //label="Country"
-                    defaultValue="Country"
-                    onChange={handleCountryChange}
-                    placeholder="Country"
-                    name="country"
-                  >
-                    {countries.map((country) => {
-                      return (
-                        <MenuItem key={country.value} value={country.value}>
-                          {country.value}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </div> */}
+              <FormControl
+                className="!m-0 rounded-xl"
+                sx={{ m: 1, width: "100%" }}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              <FormControl
+                className="!m-0 rounded-xl"
+                sx={{ m: 1, width: "100%" }}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </div>
             <div>
               {errorMessage.message || userDefinedError ? (
@@ -398,14 +371,14 @@ const Register = () => {
           </div>
           <div className="flex justify-around gap-[6%] mt-4">
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FaFacebook className="text-blue" />}
             >
               Facebook
             </Button>
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer  hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FcGoogle />}
             >

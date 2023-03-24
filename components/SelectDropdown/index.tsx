@@ -24,35 +24,33 @@ export default function Dropdown({
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }} className="w-full m-0">
-        <Select
-          className="w-full bg-white"
-          value={selectedValue}
-          onChange={handleChange}
-          renderValue={(selected) => {
-            if (selected.length === 0) {
+    <FormControl sx={{ m: 1, minWidth: 120 }} className="w-full !m-0">
+      <Select
+        className="w-full bg-white"
+        value={selectedValue}
+        onChange={handleChange}
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return (
+              <p style={{ color: "#C7C7CD", fontSize: "14px" }}>
+                {placeholder}
+              </p>
+            );
+          }
+          return selected;
+        }}
+        displayEmpty
+      >
+        {dropdownValues !== undefined
+          ? dropdownValues.map((value: any) => {
               return (
-                <p style={{ color: "#C7C7CD", fontSize: "14px" }}>
-                  {placeholder}
-                </p>
+                <MenuItem key={value} value={value}>
+                  {value}
+                </MenuItem>
               );
-            }
-            return selected;
-          }}
-          displayEmpty
-        >
-          {dropdownValues !== undefined
-            ? dropdownValues.map((value: any) => {
-                return (
-                  <MenuItem key={value} value={value}>
-                    {value}
-                  </MenuItem>
-                );
-              })
-            : ""}
-        </Select>
-      </FormControl>
-    </div>
+            })
+          : ""}
+      </Select>
+    </FormControl>
   );
 }

@@ -6,8 +6,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { RiDeleteBin5Line } from "react-icons/ri";
-
-//testing start
 import {
   deleteUserProductInCart,
   updateUserProductQtyInCart,
@@ -18,7 +16,6 @@ import {
 import { deleteMessage, totalAmount } from "@/redux-dev/cart/cart.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
-//testing end
 
 type Props = {
   product: any;
@@ -26,7 +23,6 @@ type Props = {
 };
 
 const ProductCart = ({ product, checkedOrNot }: Props) => {
-  //testing start
   const dispatch = useDispatch<AppDispatch>();
   const deleteSuccessMessage = useSelector(deleteMessage);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -95,13 +91,12 @@ const ProductCart = ({ product, checkedOrNot }: Props) => {
     });
   }, [checkedOrNot]);
 
-  //testing end
   return (
     <div className="bg-[#1F2B3E] mb-[1rem] py-[0.5rem] sm:py-[1.5rem] justify-between px-[0.5rem] sm:px-[1rem] lg:px-[1.5rem] rounded-[0.5rem] flex flex-row">
       <div className="flex flex-row items-center">
         <div>
           <Checkbox
-            className="p-[0.25rem] sm:p-[0.5rem]"
+            className="!p-0 !pr-[0.25rem] sm:!pr-[0.5rem]"
             size="small"
             onChange={(event) => checkBoxHandler(event)}
             checked={checkedOrNot ? checkedOrNot : checkboxChecked}
@@ -154,7 +149,7 @@ const ProductCart = ({ product, checkedOrNot }: Props) => {
         <div className="flex flex-row text-[#ffffff80] gap-[0.5rem] items-center sm:mt-[0.75rem]">
           {/* <FavoriteBorderIcon /> */}
           <RiDeleteBin5Line
-            className="hover:text-[#F23939] text-[1rem] sm:text-[1.25rem]"
+            className="hover:text-[#F23939] !m-auto text-[1rem] sm:text-[1.25rem]"
             //fontSize="1.25rem"
             onClick={deleteProductInCart}
           />

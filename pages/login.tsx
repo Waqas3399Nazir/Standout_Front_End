@@ -18,14 +18,12 @@ import {
   loginUser,
   errorCleanUp,
   messageCleanUp,
-  verifyToken,
 } from "@/redux-dev/auth/auth.slice";
 import {
   activityInProgress,
   error,
   message,
   user,
-  isTokenValid,
 } from "@/redux-dev/auth/auth.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
@@ -70,7 +68,6 @@ const Login = () => {
   const userMessage = useSelector(message);
   const loader = useSelector(activityInProgress);
   const userData = useSelector(user);
-  const isValid = useSelector(isTokenValid);
 
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -97,7 +94,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    // alert(process.env.NODE_ENV);
+    alert(process.env.NODE_ENV);
     if (userMessage && !loader) {
       //to clean stored error message
       dispatch(errorCleanUp());
@@ -105,16 +102,8 @@ const Login = () => {
       dispatch(messageCleanUp());
 
       router.push("/");
-      // console.log("I am called but why?!");
-      // dispatch(verifyToken());
     }
-  }, [userMessage]);
-
-  // useEffect(() => {
-  //   if (isValid) {
-  //     router.push("/");
-  //   }
-  // }, [isValid]);
+  }, [loader]);
 
   return (
     // <AuthGuard>
@@ -128,7 +117,7 @@ const Login = () => {
             <p className="text-xs mt-[0.5rem] non-italic text-black font-semibold">
               Welcome Back!
             </p>
-            <div className="w-full my-8">
+            <div className="w-full flex flex-col !gap-[0.75rem] my-8">
               <div className="w-full rounded-xl">
                 <TextField
                   className="w-full rounded-xl"
@@ -139,33 +128,31 @@ const Login = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="">
-                <FormControl
-                  className="m-0 rounded-xl mt-2.5"
-                  sx={{ m: 1, width: "100%" }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    onChange={handleChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </div>
+              <FormControl
+                className="!m-0 rounded-xl"
+                sx={{ m: 1, width: "100%" }}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </div>
             <div>
               {errorMessage.message || userDefinedError ? (
@@ -222,14 +209,14 @@ const Login = () => {
           </div>
           <div className="flex justify-around gap-[6%] mt-4">
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer  hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FaFacebook className="text-blue" />}
             >
               Facebook
             </Button>
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer  hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FcGoogle />}
             >

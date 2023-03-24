@@ -20,7 +20,6 @@ const Search = () => {
   const maxPrice = [8000, 9000, 10000, 11000, 12000];
 
   const searchProducts = () => {
-    // dispatch(getAllProducts({ yearIntroduced: selectedYear, model }));
     router.push(
       `/product?year=${selectedYear}&model=${selectedModel}&minPrice=${selectedMinPirce}&maxPrice=${selectedMaxPirce}`
     );

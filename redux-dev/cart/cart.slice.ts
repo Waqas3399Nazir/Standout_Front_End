@@ -95,14 +95,14 @@ const cartSlice = createSlice({
   name: "cartSlice",
   initialState: { ...initialState, name: "cartsSlice" },
   reducers: {
-    errorCleanUp: (state) => {
+    cartErrorCleanUp: (state) => {
       state.error = {
         code: null,
         message: "",
         error: "",
       };
     },
-    messageCleanUp: (state) => {
+    cartMessageCleanUp: (state) => {
       state.message = "";
     },
     setTotalAmount: (state, action) => {
@@ -220,8 +220,8 @@ const cartSlice = createSlice({
 });
 
 export const {
-  errorCleanUp,
-  messageCleanUp,
+  cartErrorCleanUp,
+  cartMessageCleanUp,
   setTotalAmount,
   deleteProductMessageCleanUp,
   productQtyInCart,

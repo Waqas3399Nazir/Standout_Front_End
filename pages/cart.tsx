@@ -18,6 +18,10 @@ import {
   message,
   activityInProgress,
 } from "@/redux-dev/cart/cart.selector";
+import {
+  cartErrorCleanUp,
+  cartMessageCleanUp,
+} from "@/redux-dev/cart/cart.slice";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 
@@ -47,6 +51,8 @@ const Cart = () => {
   };
 
   const emptyCart = () => {
+    dispatch(cartErrorCleanUp());
+    dispatch(cartMessageCleanUp());
     dispatch(deleteAllProductsInCart());
   };
 
@@ -118,13 +124,13 @@ const Cart = () => {
               <h3 className="text-[#F23939]">$. {totalCost?.toFixed(2)}</h3>
             </div>
             <div className="text-center">
-              <Button
-                className="w-[85%] py-[0.75rem] sm:py-[1rem] bg-[#F23939] text-white border-[#F23939] rounded-[0.5rem] mt-[1.25rem] hover:text-white hover:border-[#F23939] hover:bg-[#F23939]"
-                variant="outlined"
+              <button
+                className="w-[85%] py-[0.75rem] uppercase sm:py-[1rem] bg-[#F23939] text-white border-[#F23939] rounded-[0.5rem] !mt-[1.25rem] hover:text-white hover:border-[#F23939] hover:bg-[#F23939]"
+                //  variant="outlined"
                 onClick={navigateToCheckoutPage}
               >
                 Proceed to checkout
-              </Button>
+              </button>
             </div>
           </div>
         </div>

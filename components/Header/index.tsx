@@ -15,6 +15,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import MenuIcon from "@mui/icons-material/Menu";
 import OutsideClickHandler from "react-outside-click-handler";
+import {
+  cartErrorCleanUp,
+  cartMessageCleanUp,
+} from "@/redux-dev/cart/cart.slice";
 
 const Header = () => {
   const router = useRouter();
@@ -103,12 +107,13 @@ const Header = () => {
                 </Badge>
               </Link>
             </li>
-            <li className="inline align-middle" onClick={showHideHandler}>
+            <li className="inline align-middle">
               {!showHideBtns ? (
                 <Avatar
                   className="cursor-pointer mx-[0.75rem] w-[2rem] h-[2rem]"
                   alt="Travis Howard"
                   src="/images/header-icon.svg"
+                  onClick={showHideHandler}
                 />
               ) : (
                 // <Image
@@ -287,7 +292,7 @@ const Header = () => {
                     {!showHideBtns ? (
                       <button
                         className="px-[1rem] py-[0.5rem] w-[70%] sm:w-auto bg-[#F23939] cursor-pointer rounded-md"
-                        onClick={naviagteToSignUpPage}
+                        onClick={naviagteToLoginPage}
                       >
                         Logout
                       </button>

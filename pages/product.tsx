@@ -181,7 +181,7 @@ const Product = () => {
                   onChange={(event) => setProductName(event.target.value)}
                 />
               </div>
-              <div className="w-full m-[0rem]">
+              <div className="w-full">
                 <Dropdown
                   dropdownValues={chooseBrand}
                   selValue={setBrand}

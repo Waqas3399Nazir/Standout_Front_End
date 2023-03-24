@@ -29,6 +29,10 @@ import {
   productQtyInCart,
   getUserCartProducts,
 } from "@/redux-dev/cart/cart.slice";
+import {
+  cartErrorCleanUp,
+  cartMessageCleanUp,
+} from "@/redux-dev/cart/cart.slice";
 import { cartQty, message, cartError } from "@/redux-dev/cart/cart.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
@@ -97,6 +101,8 @@ const ProductDetails = () => {
   const addToCartHandler = (productId: number) => {
     if (productQty > 0 && productQty < 11) {
       setUserDefinedError("");
+      dispatch(cartErrorCleanUp());
+      dispatch(cartMessageCleanUp());
       dispatch(addProductToCart({ productId, quantity: productQty }));
     } else {
       setUserDefinedError("Quantity must be greater than 0 and less then 10!");
@@ -105,6 +111,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(errorCleanUp());
+    dispatch(cartErrorCleanUp());
+    dispatch(cartMessageCleanUp());
     if (router.query.productId) {
       dispatch(getSingleProduct(router.query.productId));
     }
@@ -116,6 +124,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(errorCleanUp());
+    dispatch(cartErrorCleanUp());
+    dispatch(cartMessageCleanUp());
   }, []);
 
   return (
@@ -138,7 +148,7 @@ const ProductDetails = () => {
           <div className="w-[70%] sm:w-[45%] lg:w-[54%] mt-[1rem] sm:mt-[0rem]">
             <div className="bg-[#C4C4C4] relative rounded-2xl w-full">
               <NavigateBeforeIcon
-                className="absolute text-[#F23939] cursor-pointer text-[3rem] sm:text-[4rem] lg:text-[6rem] top-[40%] left-[-25%] sm:left-[-5%]  lg:left-[-4%] "
+                className="absolute text-[#F23939] cursor-pointer !text-[3rem] sm:!text-[4rem] lg:!text-[6rem] top-[40%] left-[-25%] sm:left-[-5%]  lg:left-[-4%] "
                 onClick={decrementSlider}
               />
               {!loader && productDetails ? (
@@ -153,7 +163,7 @@ const ProductDetails = () => {
                 <CircularProgress />
               )}
               <NavigateNextIcon
-                className="absolute text-[#F23939] cursor-pointer text-[3rem] sm:text-[4rem] lg:text-[6rem] top-[40%] right-[-25%] sm:right-[-5%]  lg:right-[-4%] "
+                className="absolute text-[#F23939] cursor-pointer !text-[3rem] sm:!text-[4rem] lg:!text-[6rem] top-[40%] right-[-25%] sm:right-[-5%]  lg:right-[-4%] "
                 onClick={incrementSlider}
               />
             </div>
@@ -261,19 +271,20 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="flex flex-row gap-[1.25rem]">
-              <Button
-                className="text-[#F23939] hidden sm:block sm:text-[1.45rem] lg:text-secondContainerHeading font-Montserrat sm:w-[9rem] lg:w-fit font-semibold sm:py-[0.5rem] lg:py-[0.65rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-                variant="outlined"
+              <button
+                className="text-[#F23939] px-[0.75rem] border-[1px] py-[0.5rem] hidden sm:block sm:text-[1.45rem] lg:text-secondContainerHeading font-Montserrat sm:w-[9rem] lg:w-fit font-semibold sm:py-[0.5rem] lg:py-[0.65rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-[1px] hover:border-white mt-[1.25rem]"
+                //variant="outlined"
               >
                 ${!loader && productDetails.price ? productDetails.price : ""}
-              </Button>
-              <Button
-                className="text-[#F23939] hidden sm:hidden lg:flex bg-white w-[35%] py-[0.65rem] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-                variant="outlined"
-                startIcon={<PhonePausedIcon />}
+              </button>
+              <button
+                className="text-[#F23939] border-[1px] hidden sm:hidden items-center lg:flex lg:flex-row  px-[0.95rem] text-[1.15rem] gap-[0.25rem] bg-white w-[35%] py-[0.65rem] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white hover:border-[1px] mt-[1.25rem]"
+                // variant="outlined"
+                // startIcon={<PhonePausedIcon />}
               >
+                <PhonePausedIcon />
                 (610) 426-3025
-              </Button>
+              </button>
             </div>
             <div className="mt-[1.5rem] mb-[-1rem] w-fit">
               {cartErrorMessage.message ||
@@ -322,20 +333,20 @@ const ProductDetails = () => {
               )}
             </div>
             <div className="flex flex-row gap-[1.5rem] my-[1.5rem]">
-              <Button
-                className="text-[#F23939] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-                variant="outlined"
+              <button
+                className="text-[#F23939] text-[0.85rem] sm:text-[1rem] uppercase border-[1px] py-[0.40rem] sm:py-[0.5rem] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white hover:border-[1px] mt-[1.25rem]"
+                //variant="outlined"
                 onClick={navigateToCartPage}
               >
                 Buy Now
-              </Button>
-              <Button
-                className="text-[#F23939] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-                variant="outlined"
+              </button>
+              <button
+                className="text-[#F23939] text-[0.85rem] sm:text-[1rem] uppercase border-[1px] py-[0.40rem] sm:py-[0.5rem] bg-white w-full lg:w-[40%] border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white hover:border-[1px] mt-[1.25rem]"
+                // variant="outlined"
                 onClick={() => addToCartHandler(productDetails.id)}
               >
                 Add To Cart
-              </Button>
+              </button>
             </div>
           </div>
         </div>
