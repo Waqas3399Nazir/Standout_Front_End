@@ -5,10 +5,20 @@ import Image from "next/image";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const EmailVerification = () => {
+  const router = useRouter();
+
+  const navigateToRegisterPage = () => {
+    router.push("/register");
+  };
+
+  const navigateToLoignPage = () => {
+    router.push("/login");
+  };
+
   return (
     <div className="flex flex-row h-screen">
       <div className="flex-5 flex">
-        <div className="w-1/2 m-auto">
+        <div className="w-[80%] text-center sm:w-[60%] lg:w-[65%] m-auto">
           <CheckCircleIcon
             style={{ color: "red", fontSize: "4rem" }}
             className="mb-[2.5rem]"
@@ -17,28 +27,39 @@ const EmailVerification = () => {
             Check your email
           </h1>
           <p className="text-xs font-semibold text-black">
-            To confirm your account, click the link in the email that sent to
-            Alexadams@gmail.com
+            To confirm your account, click the link in the email that sent to{" "}
+            <strong>{router.query.email}</strong>
           </p>
           <p className="text-[0.875rem] font-light mt-[2rem]">
             <strong className="text-[0.875rem] font-light text-gray-400">
               Did not receive the email? Check your spam filter, or
             </strong>
             <br />
-            <strong className="text-[0.875rem] font-light text-[#3870FF]">
+            <strong
+              className="text-[0.875rem] font-light text-[#3870FF] cursor-pointer"
+              onClick={navigateToRegisterPage}
+            >
               Try another email address.
             </strong>
           </p>
         </div>
+        <div className="w-full text-center mt-4">
+          <p
+            className="my-8 font-medium text-[#0048B9] cursor-pointer"
+            onClick={navigateToLoignPage}
+          >
+            Return to Login
+          </p>
+        </div>
       </div>
-      <div className="flex-5 bg-registerImage">
-        {/* <Image
+      <div className="flex-5 hidden lg:block">
+        <Image
           className="w-full h-screen"
           src="/images/signup-image.png"
           alt=""
           width={100}
           height={100}
-        /> */}
+        />
       </div>
     </div>
   );

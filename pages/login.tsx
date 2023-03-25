@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +13,7 @@ import { FaFacebook } from "react-icons/fa";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
-
+import Image from "next/image";
 import {
   loginUser,
   errorCleanUp,
@@ -30,8 +28,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux-dev/store";
 import { CircularProgress } from "@material-ui/core";
-//import RouteGaurd from "@/components/RouteGaurd";
-import AuthGuard from "@/components/AuthGuard";
 
 const Login = () => {
   const router = useRouter();
@@ -46,6 +42,12 @@ const Login = () => {
     event.preventDefault();
   };
 
+  const navigateToRegisterPage = () => {
+    router.push("/register");
+  };
+  const navigateToResetPassword = () => {
+    router.push("/reset-password");
+  };
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: "",
@@ -67,26 +69,21 @@ const Login = () => {
   const loader = useSelector(activityInProgress);
   const userData = useSelector(user);
 
-  console.log(errorMessage);
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const loginUserHandler = (event: any) => {
     event.preventDefault();
-
-    console.log(errorMessage);
-
     if (userLoginData.email === "" || userLoginData.password === "") {
       setUserDefinedError("Enter valid Email and Password");
-    }
-    //to clean stored error message
-    dispatch(errorCleanUp());
-    //to clean stored message
-    dispatch(messageCleanUp());
-
-    if (userLoginData) {
+    } else if (!regexEmail.test(userLoginData.email)) {
+      setUserDefinedError("Please Enter a valid Email!");
+    } else {
+      //to clean stored error message
+      dispatch(errorCleanUp());
+      //to clean stored message
+      dispatch(messageCleanUp());
       dispatch(loginUser(userLoginData));
     }
-
-    console.log(userMessage);
   };
 
   useEffect(() => {
@@ -97,6 +94,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+    alert(process.env.NODE_ENV);
     if (userMessage && !loader) {
       //to clean stored error message
       dispatch(errorCleanUp());
@@ -109,17 +107,17 @@ const Login = () => {
 
   return (
     // <AuthGuard>
-    <div className="flex flex-row">
-      <div className="flex-5 flex md:flex">
-        <div className="w-2/3 m-auto md:w-1/2 md:m-auto md:">
+    <div className="flex flex-row h-screen">
+      <div className="flex-5 flex">
+        <div className="w-[80%] text-center sm:w-[75%] lg:w-[65%] m-auto">
           <form method="post">
             <h1 className="text-heading not-italic text-black font-bold">
               Login
             </h1>
-            <p className="text-xs non-italic text-black font-semibold">
+            <p className="text-xs mt-[0.5rem] non-italic text-black font-semibold">
               Welcome Back!
             </p>
-            <div className="w-full my-8">
+            <div className="w-full flex flex-col !gap-[0.75rem] my-8">
               <div className="w-full rounded-xl">
                 <TextField
                   className="w-full rounded-xl"
@@ -130,33 +128,31 @@ const Login = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="">
-                <FormControl
-                  className="m-0 rounded-xl mt-2.5"
-                  sx={{ m: 1, width: "100%" }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    onChange={handleChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </div>
+              <FormControl
+                className="!m-0 rounded-xl"
+                sx={{ m: 1, width: "100%" }}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </div>
             <div>
               {errorMessage.message || userDefinedError ? (
@@ -180,7 +176,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="bg-red-600 w-full py-4 rounded-xl text-base text-white font-medium cursor-pointer"
+              className="bg-red-600 w-full sm:w-[70%] lg:w-[70%] py-4 rounded-xl text-base text-white font-medium cursor-pointer"
               onClick={loginUserHandler}
             >
               {loader ? (
@@ -189,7 +185,18 @@ const Login = () => {
                 "Login"
               )}
             </button>
-            <div className="text-center">
+            <div className="w-full text-center mt-[1.5rem]">
+              <p>
+                Don’t have an account? ?{" "}
+                <strong
+                  className="text-[#F23939] cursor-pointer"
+                  onClick={navigateToRegisterPage}
+                >
+                  Sign Up
+                </strong>
+              </p>
+            </div>
+            <div className="text-center" onClick={navigateToResetPassword}>
               <p className="my-8 font-medium text-[#0048B9] cursor-pointer">
                 Forgot Password?
               </p>
@@ -200,16 +207,16 @@ const Login = () => {
             <p className="align-middle">Or</p>
             <hr className="w-2/5 align-middle" />
           </div>
-          <div className="flex justify-around md:justify-between mt-4">
+          <div className="flex justify-around gap-[6%] mt-4">
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer  hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FaFacebook className="text-blue" />}
             >
               Facebook
             </Button>
             <Button
-              className="capitalize text-black w-[10.75rem] cursor-pointer"
+              className="capitalize !border-black !text-black w-[10.75rem] cursor-pointer  hover:!text-white hover:!bg-[#F23939] hover:!border-[#F23939]"
               variant="outlined"
               startIcon={<FcGoogle />}
             >
@@ -218,7 +225,15 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block h-screen flex-5 bg-loginImage bg-no-repeat"></div>
+      <div className="hidden md:block flex-5 ">
+        <Image
+          className="w-full h-screen"
+          src="/images/login.png"
+          alt=""
+          width={100}
+          height={100}
+        />
+      </div>
     </div>
     // </AuthGuard>
   );

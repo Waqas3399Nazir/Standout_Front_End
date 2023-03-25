@@ -10,7 +10,7 @@ const initialState: IuserState = {
   isActivityInProgress: false,
   message: "",
   user: {},
-  isValid: false,
+  isTokenValid: false,
 };
 
 //register user
@@ -18,7 +18,7 @@ export const registerUser = createAsyncThunk(
   "register/user",
   async (userDetails: any, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/signUp", userDetails);
+      const { data } = await axiosInstance().post("/auth/signUp", userDetails);
       console.log(data.message);
       return data.message;
     } catch (error: any) {
@@ -33,7 +33,10 @@ export const loginUser = createAsyncThunk(
   "login/user",
   async (userCredentials: any, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/signIn", userCredentials);
+      const { data } = await axiosInstance().post(
+        "/auth/signIn",
+        userCredentials
+      );
       localStorage.setItem(SS_TOKEN, data.token);
       return data;
     } catch (error: any) {
@@ -48,10 +51,41 @@ export const verifyToken = createAsyncThunk(
   "loggedIn/user",
   async (value, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance().post("/getAuthState");
+      const { data } = await axiosInstance().get("/auth/getAuthState");
       return data;
     } catch (error: any) {
       console.log(error);
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//forgot password API
+export const forgotPassword = createAsyncThunk(
+  "forgot/password",
+  async (email: any, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance().post(
+        "auth/forget-password",
+        email
+      );
+      console.log(data);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+//update password
+export const updatePassword = createAsyncThunk(
+  "update/password",
+  async (user: any, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance().post("auth/update-password", user);
+      console.log(data);
+      return data;
+    } catch (error: any) {
       return rejectWithValue(error.response);
     }
   }
@@ -70,6 +104,7 @@ const authSlice = createSlice({
     },
     messageCleanUp: (state) => {
       state.message = "";
+      state.isTokenValid = false;
     },
   },
   extraReducers: (builder) => {
@@ -98,12 +133,10 @@ const authSlice = createSlice({
 
     builder.addCase(loginUser.rejected, (state, action: any) => {
       state.isActivityInProgress = false;
-      console.log(state.error);
       state.error = {
         code: action.payload.status,
         message: action.payload.data.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(loginUser.fulfilled, (state, action: any) => {
@@ -118,19 +151,54 @@ const authSlice = createSlice({
 
     builder.addCase(verifyToken.rejected, (state, action: any) => {
       state.isActivityInProgress = false;
+      state.isTokenValid = action.payload.data.isValid;
       state.error = {
         code: action.payload.status,
-        message: action.payload.message,
+        message: action.payload.data.message,
       };
-      console.log(state.error);
     });
 
     builder.addCase(verifyToken.fulfilled, (state, action: any) => {
       state.isActivityInProgress = false;
-      // state.user = action.payload.user;
-      state.isValid = action.payload.isValid;
+      state.isTokenValid = action.payload.isValid;
       state.message = action.payload.message;
-      console.log(action.payload);
+    });
+
+    //forgot password API
+    builder.addCase(forgotPassword.pending, (state, action: any) => {
+      state.isActivityInProgress = true;
+    });
+
+    builder.addCase(forgotPassword.rejected, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.error = {
+        code: action.payload.status,
+        message: action.payload.data.message,
+      };
+    });
+
+    builder.addCase(forgotPassword.fulfilled, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.message = action.payload.message;
+    });
+
+    //updatePassword
+    //forgot password API
+    builder.addCase(updatePassword.pending, (state, action: any) => {
+      state.isActivityInProgress = true;
+    });
+
+    builder.addCase(updatePassword.rejected, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.error = {
+        code: action.payload.status,
+        message: action.payload.data.message,
+      };
+    });
+
+    builder.addCase(updatePassword.fulfilled, (state, action: any) => {
+      state.isActivityInProgress = false;
+      state.message = action.payload.message;
     });
   },
 });

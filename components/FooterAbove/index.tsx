@@ -9,36 +9,37 @@ import Image from "next/image";
 const FooterAbove = () => {
   return (
     <>
-      <div className="bg-[#F23939] py-[5.375rem] px-[7.22%] rounded-[2.5rem]">
+      <div className="bg-[#F23939] hidden sm:block lg:block relative py-[2.5rem] sm:py-[3rem] lg:py-[5.375rem] px-[7.22%] rounded-[2.5rem]">
         <div className="flex flex-row gap-[7%]">
-          <h1 className="text-white font-heading font-bold text-heading uppercase">
+          <h1 className="text-white font-heading font-bold text-2xl sm:text-heading uppercase">
             Have any question <br /> about us?
           </h1>
-          <div className="text-white absolute ml-[40%] font-[5rem] mt-[-2rem]">
+          <div className="hidden lg:block text-white absolute left-[56%] top-[10%] font-[5rem]">
             <RxDragHandleDots1 fontSize="10rem" />
           </div>
         </div>
         <div className="flex flex-row gap-[1.5rem]">
-          <Button
-            className="text-[#F23939] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-            variant="outlined"
-            startIcon={<PhonePausedIcon />}
+          <button
+            className="text-[#F23939] px-[0.5rem] py-[0.25rem] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] border-2 hover:border-white mt-[1.25rem]"
+            // variant="outlined"
+            // startIcon={<PhonePausedIcon />}
           >
+            <PhonePausedIcon />
             (610) 426-3025
-          </Button>
-          <Button
-            className="text-[#F23939] bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
-            variant="outlined"
+          </button>
+          <button
+            className="text-[#F23939] px-[0.5rem] py-[0.25rem] border-2 bg-white border-white rounded-[0.5rem] hover:text-white hover:bg-[#F23939] hover:border-white mt-[1.25rem]"
+            // variant="outlined"
           >
             Contact Us
-          </Button>
+          </button>
         </div>
-        <div className="text-white text-[7rem] absolute ml-[44%] mt-[3.5rem]">
+        <div className="hidden lg:block text-white text-[7rem] absolute left-[60%] top-[83%]">
           <BsCircleFill />
         </div>
-        <div className="absolute ml-[42%] mt-[-19rem]">
+        <div className="absolute hidden lg:block top-[-20%] left-[58%]">
           <Image
-            className=""
+            className="min-h-autoHeight"
             src="/images/footer-above-tyre.png"
             alt=""
             width={533}

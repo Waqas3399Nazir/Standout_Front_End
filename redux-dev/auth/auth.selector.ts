@@ -27,3 +27,8 @@ export const email = createDraftSafeSelector(
   selectDomain,
   (user: IuserState) => user.email
 );
+
+export const isTokenValid = createDraftSafeSelector(
+  selectDomain,
+  (user: IuserState) => user.isTokenValid
+);
